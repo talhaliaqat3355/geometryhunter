@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:geometryhunter/screens/gallery_screen.dart';
+import 'package:geometryhunter/screens/game-draw_screen.dart';
 import 'package:geometryhunter/screens/game_mode_screen.dart';
 import 'package:get/get.dart';
 import '../constants.dart';
+import 'package:geometryhunter/screens/guide_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,16 +27,13 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           SafeArea(
               child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 40),
-                Center(
-                  child: Image.asset(
+                  Image.asset(
                    'assets/images/logo.png',
                      height: 220,
                     width: 220,
                    ),
-                 ),
                 const SizedBox(height: 40),
                 Padding(padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
@@ -61,10 +61,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
-                        Get.toNamed('/gallery');
+                        Get.to(()=>GalleryScreen());
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: kSplashBGColor,
+                        backgroundColor: kPrimaryColor,
                         minimumSize: const Size(double.infinity, 60),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
@@ -104,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
             bottom: 30,
             child: GestureDetector(
               onTap: () {
-
+                Get.to(() => GuideScreen());
               },
               child: Image.asset(
                 'assets/images/help_icon.png',

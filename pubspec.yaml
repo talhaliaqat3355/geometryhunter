@@ -36,6 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   get: ^4.7.2
   image_picker: ^1.1.2
+  permission_handler: ^12.0.0+1
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:
@@ -58,11 +60,14 @@ flutter:
     - assets/images/bg.png
     - assets/images/logo.png
     - assets/images/music_icon.png
-    - assets/images/help_icon.png
     - assets/images/tic-tac_icon.png
     - assets/images/sword_icon.png
     - assets/images/infinite_icon.png
-    - assets/images/photoAdd_icon.png
+    - assets/images/camera_placeholder.png
+    - assets/images/triangle_icon.png
+    - assets/images/guide_icon.png
+    - assets/images/help_icon.png
+    - assets/images/gallery_icon.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

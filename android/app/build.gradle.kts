@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.GeometryHunter.GH0406"
+    namespace = "com.example.geometryhunter"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "27.0.12077973"
 

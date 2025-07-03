@@ -14,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kSplashBGColor,
+      backgroundColor: kPrimaryColor,
       body: GestureDetector(
         onTap: (){Get.to(()=> HomeScreen()) ;
           },
