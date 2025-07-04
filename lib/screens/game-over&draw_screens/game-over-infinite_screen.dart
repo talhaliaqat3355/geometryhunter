@@ -17,7 +17,7 @@ class GameOverInfiniteScreen extends StatelessWidget {
     String iconPath = 'assets/images/${shape}_icon.png';
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4),
-      child: Image.asset(iconPath, width: 24, height: 24),
+      child: Image.asset(iconPath, width: 34, height: 24),
     );
   }
 
@@ -32,49 +32,71 @@ class GameOverInfiniteScreen extends StatelessWidget {
 
           SafeArea(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16,vertical: 14),
+              padding: EdgeInsets.symmetric(horizontal: 20,vertical: 18),
               child: Column(
                 children: [
                   const SizedBox(height: 40),
                   Container(
-                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 32,
+                      vertical: 20,
+                    ),
                     decoration: BoxDecoration(
                       color: kSecondaryColor,
                       borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
                     ),
-                    child: const Text(
-                      "GAME OVER!",
-                      style: TextStyle(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'GAME OVER!',
+                        style: TextStyle(
                           color: Colors.white,
-                          fontSize: 20, fontWeight:
-                      FontWeight.bold ),
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 30),
 
                   Container(
-                    padding: const EdgeInsets.all(10),
-                    margin: const EdgeInsets.symmetric(horizontal: 24),
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 70),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 20,
+                          offset: const Offset(0, 10),
+                        ),
+                      ],
                     ),
                     child: Column(
                       children: [
                         Text(
                           "$photoCount Photos",
                           style: TextStyle(
-                            fontSize: 24,
+                            fontSize: 40,
                             color: kSecondaryColor,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 30),
                         const Text(
                           "Shapes:",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold,color: kPrimaryColor,fontSize: 20),
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 10),
                         Wrap(
                           alignment: WrapAlignment.center,
                           children: shapeList.map(_buildShapeIcon).toList(),
@@ -90,34 +112,34 @@ class GameOverInfiniteScreen extends StatelessWidget {
                       Get.back();
                     },
                     style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 60),
                       backgroundColor: kSecondaryColor,
-                      padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 14),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
                     child: const Text(
                         "Start new game",
-                        style: TextStyle(color: Colors.white)
+                        style: TextStyle(color: Colors.white,fontSize: 22)
                     ),
                   ),
 
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 20),
 
                   ElevatedButton(
                     onPressed: () {
                       Get.to(() => GameModeScreen());
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF002924),
-                      padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 14),
+                      minimumSize: const Size(double.infinity,60),
+                      backgroundColor: kPrimaryColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
                     child: const Text(
                         "Go to main menu",
-                        style: TextStyle(color: Colors.white)
+                        style: TextStyle(color: Colors.white,fontSize: 22)
                     ),
                   )
                 ],

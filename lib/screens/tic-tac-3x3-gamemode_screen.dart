@@ -116,15 +116,14 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
                   ),
                   const Divider(
                     color: kPrimaryColor,
-                    endIndent: 10,
-                    indent: 10,
+
                   ),
                   const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       _playerTag("Player 1", true, currentPlayer == 1),
-                      Image.asset('assets/images/triangle_icon.png', height: 40),
+                      Image.asset('assets/images/triangle-shape_icon.png', height: 40),
                       _playerTag("Player 2", false, currentPlayer == 2),
                     ],
                   ),

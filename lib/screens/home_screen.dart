@@ -26,63 +26,66 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
           ),
           SafeArea(
-              child: Column(
-              children: [
-                const SizedBox(height: 40),
-                  Image.asset(
-                   'assets/images/logo.png',
-                     height: 220,
-                    width: 220,
-                   ),
-                const SizedBox(height: 40),
-                Padding(padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Column(
-                  children: [
-                    ElevatedButton(
-                      onPressed: (){
-                      Get.to(() => GameModeScreen());
-                    },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: kSecondaryColor,
-                        minimumSize: const Size(double.infinity, 60),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                      ),
-                        child: const Text(
-                          'Start New Game',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        ),
-                    ),
-                    ),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () {
-                        Get.to(()=>GalleryScreen());
+                children: [
+                  const SizedBox(height: 40),
+                    Image.asset(
+                     'assets/images/logo.png',
+                       height: 220,
+                      width: 220,
+                     ),
+                  const SizedBox(height: 50),
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    children: [
+                      ElevatedButton(
+                        onPressed: (){
+                        Get.to(() => GameModeScreen());
                       },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: kPrimaryColor,
-                        minimumSize: const Size(double.infinity, 60),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kSecondaryColor,
+                          minimumSize: const Size(double.infinity, 60),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
                         ),
-                      ),
-                      child: const Text(
-                        'Gallery',
+                          child: const Text(
+                            'Start New Game',
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
+                          ),
+                      ),
+                      ),
+                      const SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: () {
+                          Get.to(()=>GalleryScreen());
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kPrimaryColor,
+                          minimumSize: const Size(double.infinity, 60),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                        ),
+                        child: const Text(
+                          'Gallery',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                 ),
-                )
-               ]
+                    ],
+                   ),
+                  )
+                 ]
+                ),
               )
              ),
           Positioned(

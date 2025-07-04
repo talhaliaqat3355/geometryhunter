@@ -109,8 +109,8 @@ class SelectShapeScreen extends StatelessWidget {
                         "Play without selecting shapes",
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                          color: Colors.black,
+                          fontSize: 18,
+                          color: kPrimaryColor,
                         ),
                       ),
                     ),
@@ -123,6 +123,7 @@ class SelectShapeScreen extends StatelessWidget {
                         onShapeSelected(randomShape['name']);
                       },
                       style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(double.infinity, 20),
                         backgroundColor: kPrimaryColor,
                         padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
                         shape: RoundedRectangleBorder(

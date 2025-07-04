@@ -80,8 +80,6 @@ class _InfiniteModScreenState extends State<InfiniteModScreen> {
                     const SizedBox(height: 10),
                     Divider(
                       color: kPrimaryColor,
-                      indent: 10,
-                      endIndent: 10,
                     ),
                     const SizedBox(height: 20),
                     Row(
@@ -91,23 +89,26 @@ class _InfiniteModScreenState extends State<InfiniteModScreen> {
                         Text(
                         '${_images.length} Photos',
                           style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
                             color: kPrimaryColor
                           ),
                         )
                       ],
                     ),
                     const SizedBox(height: 10),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: const Text(
-                        'Your move!',
-                        style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: kPlayerColor,
-                      ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: const Text(
+                          'Your move!',
+                          style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: kPlayerColor,
+                        ),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -123,7 +124,7 @@ class _InfiniteModScreenState extends State<InfiniteModScreen> {
                                 if(index == _images.length){
                                   return GestureDetector(
                                     onTap: _takePhoto,
-                                    child: Image.asset('assets/images/camera_placeholder.png'),
+                                    child: Image.asset('assets/images/camera_placeholder.png',height: 100,),
                                   );
                                 }
                                 else{
@@ -138,11 +139,20 @@ class _InfiniteModScreenState extends State<InfiniteModScreen> {
                           const SizedBox(height: 20 ),
                           Padding(padding: EdgeInsets.only(bottom: 20),
                             child: ElevatedButton(
-                                onPressed: (){
-                                  Get.to(() => GameOverInfiniteScreen(
-                                  photoCount: _images.length,
-                                  shapeList: GalleryStore.getAllShapes(), // <- Create this method if not done
-                                ));},
+                                onPressed: () {
+                              final usedShapes = GalleryStore.getTaggedImages()
+                                  .map((img) => img['shape'] as String?)
+                                  .whereType<String>()
+                                  .where((shape) => shape.trim().toLowerCase() != "all")
+                                  .toSet()
+                                  .toList();
+
+                              Get.to(() => GameOverInfiniteScreen(
+                                photoCount: _images.length,
+                                shapeList: usedShapes,
+                              ));
+                            },
+
                                 style: ElevatedButton.styleFrom(
                                   minimumSize: const Size(double.infinity,60) ,
                                   backgroundColor: kPrimaryColor,
@@ -170,21 +180,21 @@ class _InfiniteModScreenState extends State<InfiniteModScreen> {
   }
   Widget _playerTag() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
         color: kPlayerColor,
         borderRadius: BorderRadius.circular(14),
       ),
       child: Row(
         children:  [
-          Image.asset('assets/images/person_icon.png', height: 20,color: Colors.white),
-         // Icon(Icons.person, size: 20, color: Colors.white),
+          Image.asset('assets/images/person_icon.png', height: 22,color: Colors.white),
           SizedBox(width: 6),
           Text(
             "Player 1",
             style: TextStyle(
               color: Colors.white,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.bold,
+              fontSize: 18
             ),
           )
         ],

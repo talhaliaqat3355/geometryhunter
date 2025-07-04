@@ -32,7 +32,7 @@ class _GameDrawState extends State<GameDrawScreen> {
                           width: double.infinity,
                           padding: const EdgeInsets.symmetric(
                             horizontal: 32,
-                            vertical: 16,
+                            vertical: 20,
                           ),
                           decoration: BoxDecoration(
                             color: kSecondaryColor,
@@ -51,16 +51,16 @@ class _GameDrawState extends State<GameDrawScreen> {
                               'GAME OVER!',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 20,
+                                fontSize: 24,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
                         ),
-                       const SizedBox(height: 20),
+                       const SizedBox(height: 30),
                         Container(
                           width: double.infinity,
-                          padding: const EdgeInsets.all(48),
+                          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 70),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
@@ -97,7 +97,7 @@ class _GameDrawState extends State<GameDrawScreen> {
                           child: const Text(
                             'Start New Game',
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 20,
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
                             ),
@@ -118,7 +118,7 @@ class _GameDrawState extends State<GameDrawScreen> {
                           child: const Text(
                             'Go to main menu',
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 20,
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
                             ),
