@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:geometryhunter/constants.dart';
 import 'package:geometryhunter/screens/game_mode_screen.dart';
 import 'package:get/get.dart';
+import 'package:get/get_navigation/src/routes/default_transitions.dart';
 
-class GameWinScreen extends StatefulWidget {
-  const GameWinScreen({super.key});
+class GameWinScreen extends StatelessWidget {
+  final int winnerPlayer;
+  const GameWinScreen({super.key, required this.winnerPlayer});
 
-  @override
-  State<GameWinScreen> createState() => _GameWinState();
-}
-
-class _GameWinState extends State<GameWinScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,14 +69,36 @@ class _GameWinState extends State<GameWinScreen> {
                             ),
                           ],
                         ),
-                        child: const Text(
-                          'WINS!',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 60,
-                            fontWeight: FontWeight.bold,
-                            color: kDrawTextColor,
+                        child:  Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                              Image.asset('assets/images/person_icon.png',
+                              height: 30,
+                              color: kSecondaryColor
+                              ),
+                                const SizedBox(width: 7),
+                                Text(
+                                  "Player $winnerPlayer",
+                                style:TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: kSecondaryColor,
+                                ) ,)
+                             ]
+                            ),
+                          const SizedBox(height: 10),
+                          Text(
+                            'WINS!',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 60,
+                              fontWeight: FontWeight.bold,
+                              color: kSecondaryColor,
+                            ),
                           ),
+                          ]
                         ),
                       ),
                       const SizedBox(height: 30),

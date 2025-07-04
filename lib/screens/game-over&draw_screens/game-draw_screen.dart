@@ -85,7 +85,7 @@ class _GameDrawState extends State<GameDrawScreen> {
                         const SizedBox(height: 30),
                         ElevatedButton(
                           onPressed: (){
-                            Get.to(() => GameModeScreen());
+                            Get.back();
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: kSecondaryColor,

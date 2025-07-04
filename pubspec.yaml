@@ -68,6 +68,7 @@ flutter:
     - assets/images/guide_icon.png
     - assets/images/help_icon.png
     - assets/images/gallery_icon.png
+    - assets/images/person_icon.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

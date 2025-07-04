@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geometryhunter/screens/gallery_screen.dart';
-import 'package:geometryhunter/screens/game-draw_screen.dart';
+import 'package:geometryhunter/screens/game-over&draw_screens/game-draw_screen.dart';
 import 'package:geometryhunter/screens/game_mode_screen.dart';
 import 'package:get/get.dart';
 import '../constants.dart';

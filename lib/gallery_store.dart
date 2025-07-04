@@ -12,7 +12,18 @@ class GalleryStore {
     return _gallery;
   }
 
+  static List<String> getAllShapes() {
+    return _gallery
+        .map((img) => img['shape'] as String?)
+        .whereType<String>() // filters out nulls and ensures non-null String
+        .where((shape) => shape != "All")
+        .toSet()
+        .toList();
+  }
+
+
   static void clear() {
     _gallery.clear();
   }
 }
+

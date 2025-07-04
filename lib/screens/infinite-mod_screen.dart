@@ -6,8 +6,9 @@ import 'package:geometryhunter/screens/select-shape_screen.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
-import 'package:geometryhunter/screens/gallery_store.dart';
+import 'package:geometryhunter/gallery_store.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:geometryhunter/screens/game-over&draw_screens/game-over-infinite_screen.dart';
 
 class InfiniteModScreen extends StatefulWidget {
   const InfiniteModScreen({super.key});
@@ -137,15 +138,20 @@ class _InfiniteModScreenState extends State<InfiniteModScreen> {
                           const SizedBox(height: 20 ),
                           Padding(padding: EdgeInsets.only(bottom: 20),
                             child: ElevatedButton(
-                                onPressed: (){},
+                                onPressed: (){
+                                  Get.to(() => GameOverInfiniteScreen(
+                                  photoCount: _images.length,
+                                  shapeList: GalleryStore.getAllShapes(), // <- Create this method if not done
+                                ));},
                                 style: ElevatedButton.styleFrom(
+                                  minimumSize: const Size(double.infinity,60) ,
                                   backgroundColor: kPrimaryColor,
-                                  padding: EdgeInsets.symmetric(horizontal: 60,vertical: 16),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30)
                                   )
                                 ),
-                                child: Text('End game',
+                                child: Text(
+                                  'End game',
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w500,
@@ -170,8 +176,9 @@ class _InfiniteModScreenState extends State<InfiniteModScreen> {
         borderRadius: BorderRadius.circular(14),
       ),
       child: Row(
-        children: const [
-          Icon(Icons.person, size: 20, color: Colors.white),
+        children:  [
+          Image.asset('assets/images/person_icon.png', height: 20,color: Colors.white),
+         // Icon(Icons.person, size: 20, color: Colors.white),
           SizedBox(width: 6),
           Text(
             "Player 1",

@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
-import '../screens/gallery_store.dart';
+import '../gallery_store.dart';
 import 'package:geometryhunter/screens/select-shape_screen.dart';
 
 class WhosBiggerScreen extends StatefulWidget {
@@ -141,10 +141,8 @@ class _WhosBiggerScreenState extends State<WhosBiggerScreen> {
                       ],
                     ),
                   ),
-
                   const SizedBox(height: 16),
 
-                  // 👤 Players & Turn
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -192,8 +190,8 @@ class _WhosBiggerScreenState extends State<WhosBiggerScreen> {
                         Get.back();
                       },
                       style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(double.infinity,60),
                         backgroundColor: kPrimaryColor,
-                        padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 16),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -224,7 +222,8 @@ class _WhosBiggerScreenState extends State<WhosBiggerScreen> {
           ),
           child: Row(
             children: [
-              Icon(Icons.person, size: 24, color: isBlue ? Colors.white : Colors.red),
+              Image.asset('assets/images/person_icon.png', height: 20,color: isBlue ? Colors.white: Colors.red),
+             // Icon(Icons.person, size: 24, color: isBlue ? Colors.white : Colors.red),
               const SizedBox(width: 4),
               Text(
                 name,

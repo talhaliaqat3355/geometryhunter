@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geometryhunter/constants.dart';
 import 'dart:io';
 import 'package:get/get.dart';
-import 'package:geometryhunter/screens/gallery_store.dart';
+import 'package:geometryhunter/gallery_store.dart';
 
 class GalleryScreen extends StatefulWidget {
   const GalleryScreen({super.key});
