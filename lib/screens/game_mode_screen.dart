@@ -4,7 +4,8 @@ import 'package:geometryhunter/screens/home_screen.dart';
 import 'package:geometryhunter/screens/infinite-mod_screen.dart';
 import 'package:geometryhunter/screens/tic-tac-3x3-gamemode_screen.dart';
 import 'package:get/get.dart';
-import 'package:geometryhunter/screens/one-vs-one_screen.dart';
+import 'package:geometryhunter/screens/1vs1game-mod_screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GameModeScreen extends StatelessWidget {
   const GameModeScreen({super.key});
@@ -23,7 +24,7 @@ class GameModeScreen extends StatelessWidget {
 
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              padding:  EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -31,34 +32,34 @@ class GameModeScreen extends StatelessWidget {
                     onTap: () {
                           Get.to(() => HomeScreen()) ;
                     },
-                    child: const Row(
+                    child:  Row(
                       children: [
-                        Icon(Icons.arrow_back_ios_rounded, size: 18, color: kPrimaryColor),
-                        SizedBox(width: 1),
+                        Icon(Icons.arrow_back_ios_rounded, size: 18.sp, color: kPrimaryColor),
+                        SizedBox(width: 1.w),
                         Text(
                           "BACK",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                            fontSize: 18.sp,
                             color: kPrimaryColor,
                           ),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 20),
+                   SizedBox(height: 20.h),
 
-                  const Center(
+                   Center(
                     child: Text(
                       "SELECT A MOD",
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 24.sp,
                         fontWeight: FontWeight.bold,
                         letterSpacing: 1,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 40),
+                   SizedBox(height: 40.h),
 
                   Expanded(
                     child: ListView(
@@ -68,13 +69,13 @@ class GameModeScreen extends StatelessWidget {
                           title: "TIC TAC TOE - 3X3",
                           onTap: (){ Get.to(() => TicTacToeScreen());},
                         ),
-                        const SizedBox(height: 20),
+                         SizedBox(height: 20.h),
                         _buildGameModeButton(
                           imagePath: 'assets/images/sword_icon.png',
                           title: "1 VS 1",
                           onTap: () {Get.to(() => WhosBiggerScreen());},
                         ),
-                        const SizedBox(height: 20),
+                         SizedBox(height: 20.h),
                         _buildGameModeButton(
                           imagePath: 'assets/images/infinite_icon.png',
                           title: "INFINITE MOD",
@@ -100,26 +101,26 @@ class GameModeScreen extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 24),
+        padding:  EdgeInsets.symmetric(vertical: 24.h),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
           boxShadow: [
             BoxShadow(
               color: Colors.grey,
-              blurRadius: 4,
+              blurRadius: 4.r,
               offset: Offset(1, 1),
             ),
           ],
         ),
         child: Column(
           children: [
-            Image.asset(imagePath, height: 78, color: kPrimaryColor),
-            const SizedBox(height: 10),
+            Image.asset(imagePath, height: 78.h, color: kPrimaryColor),
+             SizedBox(height: 10.h),
             Text(
               title,
-              style: const TextStyle(
-                fontSize: 26,
+              style:  TextStyle(
+                fontSize: 26.sp,
                 color: kPrimaryColor,
                 fontWeight: FontWeight.bold,
               ),

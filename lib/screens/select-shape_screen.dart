@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geometryhunter/constants.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SelectShapeScreen extends StatelessWidget {
   final Function(String shape) onShapeSelected;
@@ -30,41 +31,41 @@ class SelectShapeScreen extends StatelessWidget {
 
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              padding:  EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   GestureDetector(
                     onTap: () => Get.back(),
-                    child: const Row(
+                    child:  Row(
                       children: [
-                        Icon(Icons.arrow_back_ios_rounded, size: 18, color: kPrimaryColor),
-                        SizedBox(width: 1),
+                        Icon(Icons.arrow_back_ios_rounded, size: 18.sp, color: kPrimaryColor),
+                        SizedBox(width: 1.w),
                         Text(
                           "BACK",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                            fontSize: 18.sp,
                             color: kPrimaryColor,
                           ),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 20),
+                   SizedBox(height: 20.h),
 
-                  const Center(
+                   Center(
                     child: Text(
                       "SELECT A SHAPE",
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 24.sp,
                         fontWeight: FontWeight.bold,
                         letterSpacing: 1,
                       ),
                     ),
                   ),
 
-                  const SizedBox(height: 20),
+                   SizedBox(height: 20.h),
 
                   // Shape Grid
                   Expanded(
@@ -89,7 +90,7 @@ class SelectShapeScreen extends StatelessWidget {
                             child: Center(
                               child: Icon(
                                 shape['icon'],
-                                size: 48,
+                                size: 48.sp,
                                 color: Colors.black,
                               ),
                             ),
@@ -98,24 +99,24 @@ class SelectShapeScreen extends StatelessWidget {
                       },
                     ),
                   ),
-                  const SizedBox(height: 20),
+                   SizedBox(height: 20.h),
 
                   Center(
                     child: TextButton(
                       onPressed: () {
                         onShapeSelected("Unknown");
                       },
-                      child: const Text(
+                      child:  Text(
                         "Play without selecting shapes",
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: 18,
+                          fontSize: 18.sp,
                           color: kPrimaryColor,
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                   SizedBox(height: 16.h),
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
@@ -123,21 +124,21 @@ class SelectShapeScreen extends StatelessWidget {
                         onShapeSelected(randomShape['name']);
                       },
                       style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 20),
+                        minimumSize:  Size(double.infinity, 20.h),
                         backgroundColor: kPrimaryColor,
-                        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
+                        padding:  EdgeInsets.symmetric(horizontal: 40.w, vertical: 14.h),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(30.r),
                         ),
                       ),
-                      child: const Text(
+                      child:  Text(
                         "Select random shape",
-                        style: TextStyle(fontSize: 18, color: Colors.white),
+                        style: TextStyle(fontSize: 18.sp, color: Colors.white),
                       ),
                     ),
                   ),
 
-                  const SizedBox(height: 16),
+                   SizedBox(height: 16.h),
                 ],
               ),
             ),

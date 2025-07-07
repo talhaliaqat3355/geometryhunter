@@ -7,6 +7,7 @@ import 'package:geometryhunter/screens/select-shape_screen.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:geometryhunter/gallery_store.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TicTacToeScreen extends StatefulWidget {
   const TicTacToeScreen({super.key});
@@ -94,21 +95,21 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
           ),
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(20),
+              padding:  EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h ),
               child: Column(
                 children: [
-                  const SizedBox(height: 50),
+                   SizedBox(height: 50.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset('assets/images/tic-tac_icon.png', height: 30),
-                      const SizedBox(width: 5),
-                      const Text(
+                      Image.asset('assets/images/tic-tac_icon.png', height: 30.h),
+                       SizedBox(width: 5.w),
+                       Text(
                         "TIC TAC TOE - 3X3",
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          letterSpacing: 1,
+                          letterSpacing: 1.w,
                           color: kPrimaryColor,
                         ),
                       ),
@@ -118,19 +119,38 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
                     color: kPrimaryColor,
 
                   ),
-                  const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                   SizedBox(height: 20.h),
+                  Stack(
                     children: [
-                      _playerTag("Player 1", true, currentPlayer == 1),
-                      Image.asset('assets/images/triangle-shape_icon.png', height: 40),
-                      _playerTag("Player 2", false, currentPlayer == 2),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _PlayerTag("Player 1", 1),
+                          _PlayerTag("Player 2", 2),
+                        ],
+                      ),
+
+                      // Triangle positioned in center
+                      if (currentPlayer == 1)
+                        Positioned(
+                          left: 0,
+                          right: 0,
+                          top: 0,
+                          child: Center(
+                            child: Image.asset(
+                              'assets/images/triangle-shape_icon.png',
+                              height: 40.h,
+                            ),
+                          ),
+                        ),
                     ],
                   ),
-                  const SizedBox(height: 40),
+
+                   SizedBox(height: 40.h),
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      padding:  EdgeInsets.symmetric(horizontal: 16.w),
                       child: AspectRatio(
                         aspectRatio: 1,
                         child: LayoutBuilder(
@@ -150,7 +170,7 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
                                       onTap: () => _captureImage(index),
                                       child: Container(
                                         color: Colors.transparent,
-                                        padding: const EdgeInsets.all(12),
+                                        padding:  EdgeInsets.all(12.w),
                                         child: _images[index] != null
                                             ? Image.file(_images[index]!, fit: BoxFit.cover)
                                             : Image.asset('assets/images/camera_placeholder.png'),
@@ -162,25 +182,25 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
                                   top: cellSize - 1,
                                   left: 0,
                                   right: 0,
-                                  child: Container(height: 2, color: kPrimaryColor),
+                                  child: Container(height: 2.h, color: kPrimaryColor),
                                 ),
                                 Positioned(
                                   top: (cellSize * 2) - 1,
                                   left: 0,
                                   right: 0,
-                                  child: Container(height: 2, color: kPrimaryColor),
+                                  child: Container(height: 2.h, color: kPrimaryColor),
                                 ),
                                 Positioned(
                                   left: cellSize - 1,
                                   top: 0,
-                                  bottom: 150,
-                                  child: Container(width: 2, color: kPrimaryColor),
+                                  bottom: 150.h,
+                                  child: Container(width: 2.w, color: kPrimaryColor),
                                 ),
                                 Positioned(
                                   left: (cellSize * 2) - 1,
                                   top: 0,
-                                  bottom: 150,
-                                  child: Container(width: 2, color: kPrimaryColor),
+                                  bottom: 150.h,
+                                  child: Container(width: 2.w, color: kPrimaryColor),
                                 ),
                               ],
                             );
@@ -190,7 +210,7 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
+                    padding:  EdgeInsets.only(bottom: 20.h),
                     child: ElevatedButton(
                       onPressed: () {
                         int? winner;
@@ -208,17 +228,17 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
                       },
 
                       style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 60),
+                        minimumSize:  Size(double.infinity, 60.h),
                         backgroundColor: kPrimaryColor,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(30.r),
                         ),
                       ),
-                      child: const Text(
+                      child:  Text(
                         "End game",
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 18,
+                          fontSize: 18.sp,
                         ),
                       ),
                     ),
@@ -232,39 +252,52 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
     );
   }
 
-  Widget _playerTag(String name, bool isBlue, bool isActive) {
+  Widget _PlayerTag(String name, int playerNumber) {
+    final bool isActive = currentPlayer == playerNumber;
+    final bool isPlayer1 = playerNumber == 1;
+
+    final Color activeColor = isPlayer1 ? Colors.blue.shade600 : Colors.red.shade600;
+    final Color textColor = Colors.white;
+
     return Column(
       children: [
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+          padding:  EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
           decoration: BoxDecoration(
-            color: isBlue ? Colors.blue.shade600 : Colors.transparent,
-            borderRadius: BorderRadius.circular(10),
+            color: isActive ? activeColor : Colors.transparent,
+            borderRadius: BorderRadius.circular(14.r),
           ),
           child: Row(
             children: [
-             Image.asset('assets/images/person_icon.png', height: 20,color: isBlue ? Colors.white: Colors.red),
-             // Icon(Icons.person, size: 24, color: isBlue ? Colors.white : Colors.red),
-              const SizedBox(width: 4),
+              Image.asset(
+                'assets/images/person_icon.png',
+                height: 22.h,
+                color: isActive ? Colors.white : (isPlayer1 ? Colors.blue : Colors.red),
+              ),
+               SizedBox(width: 4.w),
               Text(
                 name,
                 style: TextStyle(
-                  color: isBlue ? Colors.white : Colors.red,
+                  color: isActive ? textColor : (isPlayer1 ? Colors.blue : Colors.red),
                   fontWeight: FontWeight.w600,
-                  fontSize: 18,
+                  fontSize: 18.sp,
                 ),
               ),
             ],
           ),
         ),
         if (isActive)
-          const Padding(
-            padding: EdgeInsets.only(top: 10),
+          Padding(
+            padding:  EdgeInsets.only(top: 10.h),
             child: Text(
               "Your move!",
-              style: TextStyle(color: kPlayerColor, fontWeight: FontWeight.bold, fontSize: 18),
+              style: TextStyle(
+                color: isPlayer1 ? Colors.blue.shade600 : Colors.red,
+                fontWeight: FontWeight.bold,
+                fontSize: 18.sp,
+              ),
             ),
-          )
+          ),
       ],
     );
   }

@@ -3,6 +3,7 @@ import 'package:geometryhunter/constants.dart';
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:geometryhunter/gallery_store.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GalleryScreen extends StatefulWidget {
   const GalleryScreen({super.key});
@@ -47,31 +48,31 @@ class _GalleryScreenState extends State<GalleryScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 30),
+                 SizedBox(height: 30.h),
 
                 //  Back
                 GestureDetector(
                   onTap:()=> Get.back(),
                   child: Row(
-                    children: const [
-                      SizedBox(width: 12),
-                      Icon(Icons.arrow_back_ios_rounded, size: 20),
+                    children:  [
+                      SizedBox(width: 12.w),
+                      Icon(Icons.arrow_back_ios_rounded, size: 20.sp),
                       Text(
                         "BACK",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                          fontSize: 20.sp,
                         ),
                       )
                     ],
                   ),
                 ),
-                const SizedBox(height: 20),
+                 SizedBox(height: 20.h),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset('assets/images/gallery_icon.png'),
-                      SizedBox(width: 10),
+                      SizedBox(width: 10.w),
                       Text(
                         "Gallery",
                         style: TextStyle(
@@ -83,21 +84,21 @@ class _GalleryScreenState extends State<GalleryScreen> {
                       ),
                     ]
                 ),
-                const SizedBox(height: 10),
+                 SizedBox(height: 10.h),
                 Divider(
                   color: kPrimaryColor,
                   indent: 20,
                   endIndent: 20,
                 ),
-                const SizedBox(height: 20),
+                 SizedBox(height: 20.h),
                 // 🔘 Shape filters
                 SizedBox(
-                  height: 40,
+                  height: 40.h,
                   child: ListView.separated(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    padding:  EdgeInsets.symmetric(horizontal: 12.w),
                     scrollDirection: Axis.horizontal,
                     itemCount: shapeFilters.length,
-                    separatorBuilder: (_, __) => const SizedBox(width: 8),
+                    separatorBuilder: (_, __) =>  SizedBox(width: 8.w),
                     itemBuilder: (context, index) {
                       final shape = shapeFilters[index];
                       final isSelected = selectedShape == shape;
@@ -109,14 +110,14 @@ class _GalleryScreenState extends State<GalleryScreen> {
                           });
                         },
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          padding:  EdgeInsets.symmetric(horizontal: 16.w),
                           decoration: BoxDecoration(
                             color: isSelected ? Colors.green : Colors.white,
                             border: Border.all(
                                 color: isSelected
                                     ? Colors.green
-                                    : Color(0xFF0FAF5F)),
-                            borderRadius: BorderRadius.circular(10),
+                                    : kSecondaryColor),
+                            borderRadius: BorderRadius.circular(10.r),
                           ),
                           child: Center(
                             child: Text(
@@ -124,7 +125,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                               style: TextStyle(
                                 color: isSelected
                                     ? Colors.white
-                                    : Color(0xFF0FAF5F),
+                                    : kSecondaryColor,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -135,11 +136,11 @@ class _GalleryScreenState extends State<GalleryScreen> {
                   ),
                 ),
 
-                const SizedBox(height: 16),
+                 SizedBox(height: 16),
                 //image grid
                 Expanded(
                   child: GridView.builder(
-                    padding: const EdgeInsets.all(12),
+                    padding:  EdgeInsets.all(12),
                     itemCount: filtered.length,
                     gridDelegate:
                     const SliverGridDelegateWithFixedCrossAxisCount(
@@ -152,7 +153,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                       return Stack(
                         children: [
                           ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(8.r),
                             child: Image.file(
                               File(item['path']),
                               fit: BoxFit.cover,
@@ -161,8 +162,8 @@ class _GalleryScreenState extends State<GalleryScreen> {
                             ),
                           ),
                           Positioned(
-                            right: 6,
-                            bottom: 6,
+                            right: 6.w,
+                            bottom: 6.h,
                             child: shapeIcon(item["shape"]),
                           ),
                         ],

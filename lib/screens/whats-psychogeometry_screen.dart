@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geometryhunter/constants.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WhatsPsychogeometryScreen extends StatefulWidget {
   const WhatsPsychogeometryScreen({super.key});
@@ -30,50 +31,55 @@ class _WhatsPsychogeometryScreenState extends State<WhatsPsychogeometryScreen> {
           ),
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              padding:  EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 20),
+                   SizedBox(height: 20.h),
                   GestureDetector(
                     onTap: () => Get.back(),
-                    child: const Row(
+                    child:  Row(
                       children: [
                         Icon(Icons.arrow_back_ios_rounded,
-                            size: 18, color: kPrimaryColor),
-                        SizedBox(width: 1),
+                            size: 18.sp, color: kPrimaryColor),
+                        SizedBox(width: 1.w),
                         Text(
                           "BACK",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                            fontSize: 18.sp,
                             color: kPrimaryColor,
                           ),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  // Header without icon
+                   SizedBox(height: 20.h),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                     children: [
-                       Image.asset('assets/images/guide_icon.png'),
-                     SizedBox(width: 10),
-                     Text(
-                      "WHAT IS PSYCHOGEOMETRY?",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1,
+                    children: [
+                      Image.asset('assets/images/guide_icon.png'),
+                      SizedBox(width: 10.w),
+                      Expanded( // ensures the Text wraps within available space
+                        child: Text(
+                          "WHAT IS PSYCHOGEOMETRY?",
+                          softWrap: true,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 18.sp, // slightly reduced to avoid overflow
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.w,
+                          ),
+                        ),
                       ),
-                    ),
-                   ]
+                    ],
                   ),
+
                   const Divider(
                     color: kPrimaryColor,
                   ),
-                  const SizedBox(height: 30),
+                   SizedBox(height: 30.h),
 
                   // Expansion Tiles with Dividers
                   Expanded(
@@ -90,7 +96,7 @@ class _WhatsPsychogeometryScreenState extends State<WhatsPsychogeometryScreen> {
                             });
                           },
                         ),
-                        const SizedBox(height: 10),
+                         SizedBox(height: 10.h),
 
                         // Core Idea Section
                         _buildSection(
@@ -105,7 +111,7 @@ class _WhatsPsychogeometryScreenState extends State<WhatsPsychogeometryScreen> {
                             });
                           },
                         ),
-                        const SizedBox(height: 10),
+                         SizedBox(height: 10.h),
 
                         // How to Identify Section
                         _buildSection(
@@ -118,7 +124,7 @@ class _WhatsPsychogeometryScreenState extends State<WhatsPsychogeometryScreen> {
                             });
                           },
                         ),
-                        const SizedBox(height: 10),
+                         SizedBox(height: 10.h),
 
                         // Important Note Section
                         _buildSection(
@@ -131,7 +137,7 @@ class _WhatsPsychogeometryScreenState extends State<WhatsPsychogeometryScreen> {
                             });
                           },
                         ),
-                        const SizedBox(height: 10),
+                         SizedBox(height: 10.h),
                       ],
                     ),
                   ),
@@ -155,31 +161,33 @@ class _WhatsPsychogeometryScreenState extends State<WhatsPsychogeometryScreen> {
         GestureDetector(
           onTap: onTap,
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 16),
+            padding:  EdgeInsets.symmetric(vertical: 16.h),
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
                   color: kPrimaryColor.withOpacity(0.3),
-                  width: 2,
+                  width: 2.w,
                 ),
               ),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Text(
+                    title,
+                    style:  TextStyle(
+                      fontSize: 22.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 AnimatedRotation(
                   turns: expanded ? 1.25 : 1,
                   duration: const Duration(milliseconds: 300),
-                  child: const Icon(
+                  child:  Icon(
                     Icons.arrow_forward_ios,
-                    size: 20,
+                    size: 20.sp,
                     color: kPrimaryColor,
                   ),
                 ),
@@ -189,12 +197,12 @@ class _WhatsPsychogeometryScreenState extends State<WhatsPsychogeometryScreen> {
         ),
         if (expanded)
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+            padding:  EdgeInsets.symmetric(vertical: 16.h, horizontal: 8.w),
             child: Text(
               content,
-              style: const TextStyle(
-                fontSize: 22,
-                height: 1.5,
+              style:  TextStyle(
+                fontSize: 22.sp,
+                height: 1.5.h,
               ),
             ),
           ),

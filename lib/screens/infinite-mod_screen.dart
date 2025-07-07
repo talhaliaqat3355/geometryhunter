@@ -9,6 +9,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:geometryhunter/gallery_store.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:geometryhunter/screens/game-over&draw_screens/game-over-infinite_screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class InfiniteModScreen extends StatefulWidget {
   const InfiniteModScreen({super.key});
@@ -55,33 +56,33 @@ class _InfiniteModScreenState extends State<InfiniteModScreen> {
           ),
           SafeArea(
               child: Padding(
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.symmetric(horizontal:20.w, vertical: 20.h),
                 child: Column(
                   children: [
-                    const SizedBox(height: 40),
+                     SizedBox(height: 40.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
                           'assets/images/infinite_icon.png',
-                          height: 30,
+                          height: 30.h,
                         ),
-                        const SizedBox(width: 10),
+                         SizedBox(width: 10.w),
                         Text(
                           'INFINITE MOD',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 24,
+                            fontSize: 24.sp,
                             color: kPrimaryColor,
                           ),
                         )
                       ],
                     ),
-                    const SizedBox(height: 10),
+                     SizedBox(height: 10.h),
                     Divider(
                       color: kPrimaryColor,
                     ),
-                    const SizedBox(height: 20),
+                     SizedBox(height: 20.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -89,29 +90,29 @@ class _InfiniteModScreenState extends State<InfiniteModScreen> {
                         Text(
                         '${_images.length} Photos',
                           style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 22.sp,
                             fontWeight: FontWeight.bold,
                             color: kPrimaryColor
                           ),
                         )
                       ],
                     ),
-                    const SizedBox(height: 10),
+                     SizedBox(height: 10.h),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      padding: EdgeInsets.symmetric(horizontal: 10.h),
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: const Text(
+                        child:  Text(
                           'Your move!',
                           style: TextStyle(
                           fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                            fontSize: 20.sp,
                             color: kPlayerColor,
                         ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
+                     SizedBox(height: 20.h),
                     Expanded(
                             child: GridView.builder(
                               itemCount: _images.length + 1,
@@ -129,15 +130,15 @@ class _InfiniteModScreenState extends State<InfiniteModScreen> {
                                 }
                                 else{
                                   return ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
+                                    borderRadius: BorderRadius.circular(8.r),
                                    child: Image.file(_images [index], fit: BoxFit.cover,)
                                   );
                                 }
                               },
                             ),
                          ),
-                          const SizedBox(height: 20 ),
-                          Padding(padding: EdgeInsets.only(bottom: 20),
+                           SizedBox(height: 20.h ),
+                          Padding(padding: EdgeInsets.only(bottom: 20.h),
                             child: ElevatedButton(
                                 onPressed: () {
                               final usedShapes = GalleryStore.getTaggedImages()
@@ -154,16 +155,16 @@ class _InfiniteModScreenState extends State<InfiniteModScreen> {
                             },
 
                                 style: ElevatedButton.styleFrom(
-                                  minimumSize: const Size(double.infinity,60) ,
+                                  minimumSize:  Size(double.infinity,60.h) ,
                                   backgroundColor: kPrimaryColor,
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30)
+                                    borderRadius: BorderRadius.circular(30.r)
                                   )
                                 ),
                                 child: Text(
                                   'End game',
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 18.sp,
                                   fontWeight: FontWeight.w500,
                                   color: Colors.white,
                                 ),
@@ -180,21 +181,21 @@ class _InfiniteModScreenState extends State<InfiniteModScreen> {
   }
   Widget _playerTag() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding:  EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
       decoration: BoxDecoration(
         color: kPlayerColor,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(14.r),
       ),
       child: Row(
         children:  [
-          Image.asset('assets/images/person_icon.png', height: 22,color: Colors.white),
-          SizedBox(width: 6),
+          Image.asset('assets/images/person_icon.png', height: 22.h,color: Colors.white),
+          SizedBox(width: 6.w),
           Text(
             "Player 1",
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
-              fontSize: 18
+              fontSize: 18.sp
             ),
           )
         ],

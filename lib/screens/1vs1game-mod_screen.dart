@@ -10,6 +10,7 @@ import '../gallery_store.dart';
 import 'package:geometryhunter/screens/select-shape_screen.dart';
 import 'package:geometryhunter/screens/game-over&draw_screens/game-draw_screen.dart';
 import 'package:geometryhunter/screens/game-over&draw_screens/game-win(1vs1)_screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WhosBiggerScreen extends StatefulWidget {
   const WhosBiggerScreen({super.key});
@@ -17,9 +18,11 @@ class WhosBiggerScreen extends StatefulWidget {
   @override
   State<WhosBiggerScreen> createState() => _WhosBiggerScreenState();
 }
-
 class _WhosBiggerScreenState extends State<WhosBiggerScreen> {
   final ImagePicker _picker = ImagePicker();
+  String? player1ImagePath;
+  String? player2ImagePath;
+
   int currentPlayer = 1;
   int secondsLeft = 60;
   Timer? _timer;
@@ -56,9 +59,6 @@ class _WhosBiggerScreenState extends State<WhosBiggerScreen> {
     });
   }
 
-
-
-
   @override
   void dispose() {
     _timer?.cancel();
@@ -83,6 +83,11 @@ class _WhosBiggerScreenState extends State<WhosBiggerScreen> {
         );
 
         setState(() {
+          if (currentPlayer == 1) {
+            player1ImagePath = imageFile.path;
+          } else {
+            player2ImagePath = imageFile.path;
+          }
           currentPlayer = currentPlayer == 1 ? 2 : 1;
         });
       }
@@ -106,19 +111,19 @@ class _WhosBiggerScreenState extends State<WhosBiggerScreen> {
 
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+              padding:  EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
               child: Column(
                 children: [
-                  const SizedBox(height: 20),
+                   SizedBox(height: 20.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset('assets/images/sword_icon.png', height: 40),
-                      const SizedBox(width: 8),
-                      const Text(
+                      Image.asset('assets/images/sword_icon.png', height: 40.h),
+                       SizedBox(width: 8.w),
+                       Text(
                         "1 VS 1",
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 24.sp,
                           fontWeight: FontWeight.bold,
                           color: kPrimaryColor,
                         ),
@@ -126,28 +131,28 @@ class _WhosBiggerScreenState extends State<WhosBiggerScreen> {
                     ],
                   ),
                   const Divider(color: kPrimaryColor),
-                  const SizedBox(height: 20),
+                   SizedBox(height: 20.h),
 
                   // Timer Bar
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 0),
+                    padding:  EdgeInsets.symmetric(horizontal: 0),
                     child: Stack(
                       children: [
                         Container(
-                          height: 40,
+                          height: 40.h,
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: kPrimaryColor,
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(20.r),
                           ),
                         ),
                         AnimatedContainer(
                           duration: const Duration(milliseconds: 300),
-                          height: 40,
+                          height: 40.h,
                           width: MediaQuery.of(context).size.width * (secondsLeft / 60),
                           decoration: BoxDecoration(
                             color: kSecondaryColor,
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(20.r),
                           ),
                         ),
                         Positioned.fill(
@@ -164,7 +169,7 @@ class _WhosBiggerScreenState extends State<WhosBiggerScreen> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 16),
+                   SizedBox(height: 20.h),
 
                   // Player tags and score / icon
                   Row(
@@ -174,30 +179,29 @@ class _WhosBiggerScreenState extends State<WhosBiggerScreen> {
                       // Player 1 + Camera
                       Column(
                         children: [
-                          _PlayerTag("Player 1", true, currentPlayer == 1),
+                          _PlayerTag("Player 1", 1),
                           if (currentPlayer == 1)
-                            const SizedBox(height: 10),
+                             SizedBox(height: 10.h),
                           if (currentPlayer == 1)
                             GestureDetector(
                               onTap: _takeTurn,
                               child: Image.asset(
                                 'assets/images/camera_placeholder.png',
-                                height: 60,
+                                height: 60.h,
                               ),
                             ),
                         ],
                       ),
-
-                      // Score or Triangle icon
+                          // Score or Triangle Ico
                       SizedBox(
-                        height: 120, // adjust based on your layout
+                        height: 50.h, // adjust based on your layout
                         child: Center(
                           child: GalleryStore.getTaggedImages().isEmpty
-                              ? Image.asset('assets/images/triangle-shape_icon.png', height: 30)
+                              ? Image.asset('assets/images/triangle-shape_icon.png', height: 30.h)
                               : Text(
                             "${_getPlayerImageCount(1)} : ${_getPlayerImageCount(2)}",
-                            style: const TextStyle(
-                              fontSize: 22,
+                            style:  TextStyle(
+                              fontSize: 22.sp,
                               fontWeight: FontWeight.bold,
                               color: kPrimaryColor,
                             ),
@@ -208,42 +212,43 @@ class _WhosBiggerScreenState extends State<WhosBiggerScreen> {
                       // Player 2 + Camera
                       Column(
                         children: [
-                          _PlayerTag("Player 2", false, currentPlayer == 2),
+                          _PlayerTag("Player 2", 2),
                           if (currentPlayer == 2)
-                            const SizedBox(height: 10),
+                             SizedBox(height: 10.h),
                           if (currentPlayer == 2)
                             GestureDetector(
                               onTap: _takeTurn,
                               child: Image.asset(
                                 'assets/images/camera_placeholder.png',
-                                height: 60,
+                                height: 60.h,
                               ),
                             ),
                         ],
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
+               //   const SizedBox(height: 16),
+                  const Spacer(),
 
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 60),
-                        backgroundColor: kPrimaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
+                   padding:  EdgeInsets.only(bottom: 20.h),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            minimumSize:  Size(double.infinity, 60.h),
+                            backgroundColor: kPrimaryColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.r),
+                            ),
+                          ),
+                          child:  Text(
+                            "End game",
+                            style: TextStyle(color: Colors.white, fontSize: 18.sp),
+                          ),
                         ),
                       ),
-                      child: const Text(
-                        "End game",
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -252,39 +257,69 @@ class _WhosBiggerScreenState extends State<WhosBiggerScreen> {
       ),
     );
   }
+  Widget _PlayerTag(String name, int playerNumber) {
+    final bool isActive = currentPlayer == playerNumber;
+    final bool isPlayer1 = playerNumber == 1;
 
-  Widget _PlayerTag(String name, bool isBlue, bool isActive) {
+    final Color activeColor = isPlayer1 ? Colors.blue.shade600 : Colors.red.shade600;
+    final Color textColor = Colors.white;
+
+    // Pick correct image path
+    String? imagePath = isPlayer1 ? player1ImagePath : player2ImagePath;
+
     return Column(
       children: [
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          padding:  EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
           decoration: BoxDecoration(
-            color: isBlue ? Colors.blue.shade600 : Colors.transparent,
-            borderRadius: BorderRadius.circular(14),
+            color: isActive ? activeColor : Colors.transparent,
+            borderRadius: BorderRadius.circular(14.r),
           ),
           child: Row(
             children: [
-              Image.asset('assets/images/person_icon.png', height: 22, color: isBlue ? Colors.white : Colors.red),
-              const SizedBox(width: 4),
+              Image.asset(
+                'assets/images/person_icon.png',
+                height: 22.h,
+                color: isActive ? Colors.white : (isPlayer1 ? Colors.blue : Colors.red),
+              ),
+               SizedBox(width: 4.w),
               Text(
                 name,
                 style: TextStyle(
-                  color: isBlue ? Colors.white : Colors.red,
+                  color: isActive ? textColor : (isPlayer1 ? Colors.blue : Colors.red),
                   fontWeight: FontWeight.w600,
-                  fontSize: 18,
+                  fontSize: 18.sp,
                 ),
               ),
             ],
           ),
         ),
         if (isActive)
-          const Padding(
-            padding: EdgeInsets.only(top: 10),
+          Padding(
+            padding:  EdgeInsets.only(top: 10.h),
             child: Text(
               "Your move!",
-              style: TextStyle(color: kPlayerColor, fontWeight: FontWeight.bold, fontSize: 18),
+              style: TextStyle(
+                color: isPlayer1 ? Colors.blue.shade600 : Colors.red,
+                fontWeight: FontWeight.bold,
+                fontSize: 18.sp,
+              ),
             ),
-          )
+          ),
+         SizedBox(height: 20.h),
+        if (imagePath != null)
+          Container(
+            width: 80.w,
+            height: 60.h,
+            decoration: BoxDecoration(
+              border: Border.all(color: kPlayerColor, width: 2.w),
+              borderRadius: BorderRadius.circular(8.r),
+            ),
+            child: Image.file(
+              File(imagePath),
+              fit: BoxFit.cover,
+            ),
+          ),
       ],
     );
   }

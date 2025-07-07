@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geometryhunter/constants.dart';
 import 'package:geometryhunter/screens/game_mode_screen.dart';
 import 'package:get/get.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class GameDrawScreen extends StatefulWidget {
   const GameDrawScreen({super.key});
 
@@ -27,20 +27,20 @@ class _GameDrawState extends State<GameDrawScreen> {
                   padding: EdgeInsets.all(20),
                   child: Column(
                       children: [
-                        const SizedBox(height: 40),
+                         SizedBox(height: 40.h),
                         Container(
                           width: double.infinity,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 32,
-                            vertical: 20,
+                          padding:  EdgeInsets.symmetric(
+                            horizontal: 32.w,
+                            vertical: 20.h,
                           ),
                           decoration: BoxDecoration(
                             color: kSecondaryColor,
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(10.r),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.2),
-                                blurRadius: 8,
+                                blurRadius: 8.r,
                                 offset: const Offset(0, 4),
                               ),
                             ],
@@ -51,74 +51,74 @@ class _GameDrawState extends State<GameDrawScreen> {
                               'GAME OVER!',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 24,
+                                fontSize: 24.sp,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
                         ),
-                       const SizedBox(height: 30),
+                        SizedBox(height: 30.h),
                         Container(
                           width: double.infinity,
-                          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 70),
+                          padding:  EdgeInsets.symmetric(horizontal: 40.w, vertical: 70.h),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(10.r),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.1),
-                                blurRadius: 20,
+                                blurRadius: 20.r,
                                 offset: const Offset(0, 10),
                               ),
                             ],
                           ),
-                          child: const Text(
+                          child:  Text(
                             'Draw',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 60,
+                              fontSize: 60.sp,
                               fontWeight: FontWeight.bold,
                               color: kDrawTextColor,
                             ),
                           ),
                         ),
-                        const SizedBox(height: 30),
+                         SizedBox(height: 30.h),
                         ElevatedButton(
                           onPressed: (){
                             Get.back();
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: kSecondaryColor,
-                            minimumSize: const Size(double.infinity, 60),
+                            minimumSize:  Size(double.infinity, 60.h),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30),
                             ),
                           ),
-                          child: const Text(
+                          child:  Text(
                             'Start New Game',
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 20.sp,
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
-                        const SizedBox(height: 20),
+                         SizedBox(height: 20.h),
                         ElevatedButton(
                           onPressed: () {
                             Get.to(()=>GameModeScreen());
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: kPrimaryColor,
-                            minimumSize: const Size(double.infinity, 60),
+                            minimumSize:  Size(double.infinity, 60.h),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
+                              borderRadius: BorderRadius.circular(30.r),
                             ),
                           ),
-                          child: const Text(
+                          child:  Text(
                             'Go to main menu',
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 20.sp,
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
                             ),

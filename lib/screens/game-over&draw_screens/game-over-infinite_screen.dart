@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geometryhunter/constants.dart';
 import 'package:geometryhunter/screens/game_mode_screen.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GameOverInfiniteScreen extends StatelessWidget {
   final int photoCount;
@@ -16,8 +17,8 @@ class GameOverInfiniteScreen extends StatelessWidget {
   Widget _buildShapeIcon(String shape) {
     String iconPath = 'assets/images/${shape}_icon.png';
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4),
-      child: Image.asset(iconPath, width: 34, height: 24),
+      padding:  EdgeInsets.symmetric(horizontal: 4.w),
+      child: Image.asset(iconPath, width: 34.w, height: 24.h),
     );
   }
 
@@ -32,23 +33,23 @@ class GameOverInfiniteScreen extends StatelessWidget {
 
           SafeArea(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20,vertical: 18),
+              padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 18.h),
               child: Column(
                 children: [
-                  const SizedBox(height: 40),
+                   SizedBox(height: 40.h),
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 32,
-                      vertical: 20,
+                    padding:  EdgeInsets.symmetric(
+                      horizontal: 32.w,
+                      vertical: 20.h,
                     ),
                     decoration: BoxDecoration(
                       color: kSecondaryColor,
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10.r),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.2),
-                          blurRadius: 8,
+                          blurRadius: 8.r,
                           offset: const Offset(0, 4),
                         ),
                       ],
@@ -59,20 +60,20 @@ class GameOverInfiniteScreen extends StatelessWidget {
                         'GAME OVER!',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 24,
+                          fontSize: 24.sp,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30),
+                   SizedBox(height: 30.h),
 
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 70),
+                    padding:  EdgeInsets.symmetric(horizontal: 40.w ,vertical: 70.h),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10.r),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.1),
@@ -86,17 +87,17 @@ class GameOverInfiniteScreen extends StatelessWidget {
                         Text(
                           "$photoCount Photos",
                           style: TextStyle(
-                            fontSize: 40,
+                            fontSize: 40.sp,
                             color: kSecondaryColor,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 30),
-                        const Text(
+                         SizedBox(height: 30.h),
+                         Text(
                           "Shapes:",
-                          style: TextStyle(fontWeight: FontWeight.bold,color: kPrimaryColor,fontSize: 20),
+                          style: TextStyle(fontWeight: FontWeight.bold,color: kPrimaryColor,fontSize: 20.sp),
                         ),
-                        const SizedBox(height: 10),
+                         SizedBox(height: 10.h),
                         Wrap(
                           alignment: WrapAlignment.center,
                           children: shapeList.map(_buildShapeIcon).toList(),
@@ -105,22 +106,22 @@ class GameOverInfiniteScreen extends StatelessWidget {
                     ),
                   ),
 
-                  const SizedBox(height: 40),
+                   SizedBox(height: 40.h),
 
                   ElevatedButton(
                     onPressed: () {
                       Get.back();
                     },
                     style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(double.infinity, 60),
+                      minimumSize:  Size(double.infinity, 60.h),
                       backgroundColor: kSecondaryColor,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(30.r),
                       ),
                     ),
-                    child: const Text(
+                    child:  Text(
                         "Start new game",
-                        style: TextStyle(color: Colors.white,fontSize: 22)
+                        style: TextStyle(color: Colors.white,fontSize: 22.sp)
                     ),
                   ),
 
@@ -131,15 +132,15 @@ class GameOverInfiniteScreen extends StatelessWidget {
                       Get.to(() => GameModeScreen());
                     },
                     style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(double.infinity,60),
+                      minimumSize:  Size(double.infinity,60.h),
                       backgroundColor: kPrimaryColor,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(30.r),
                       ),
                     ),
-                    child: const Text(
+                    child:  Text(
                         "Go to main menu",
-                        style: TextStyle(color: Colors.white,fontSize: 22)
+                        style: TextStyle(color: Colors.white,fontSize: 22.sp)
                     ),
                   )
                 ],

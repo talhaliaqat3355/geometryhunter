@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:geometryhunter/constants.dart';
+import 'package:geometryhunter/gallery_store.dart';
 import 'package:geometryhunter/screens/game_mode_screen.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/default_transitions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GameWinScreen extends StatelessWidget {
   final int winnerPlayer;
@@ -21,23 +23,23 @@ class GameWinScreen extends StatelessWidget {
             ),
             SafeArea(
               child: Padding(
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
                 child: Column(
                     children: [
-                      const SizedBox(height: 40),
+                       SizedBox(height: 40.h),
                       Container(
                         width: double.infinity,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 32,
-                          vertical: 16,
+                        padding:  EdgeInsets.symmetric(
+                          horizontal: 32.w,
+                          vertical: 16.h,
                         ),
                         decoration: BoxDecoration(
                           color: kSecondaryColor,
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(10.r),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.2),
-                              blurRadius: 8,
+                              blurRadius: 8.r,
                               offset: const Offset(0, 4),
                             ),
                           ],
@@ -48,23 +50,23 @@ class GameWinScreen extends StatelessWidget {
                             'GAME OVER!',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 20,
+                              fontSize: 20.sp,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
+                       SizedBox(height: 20.h),
                       Container(
                         width: double.infinity,
-                        padding: const EdgeInsets.all(48),
+                        padding:  EdgeInsets.all(48),
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(10.r),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.1),
-                              blurRadius: 20,
+                              blurRadius: 20.r,
                               offset: const Offset(0, 10),
                             ),
                           ],
@@ -75,10 +77,10 @@ class GameWinScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                               Image.asset('assets/images/person_icon.png',
-                              height: 30,
+                              height: 30.h,
                               color: kSecondaryColor
                               ),
-                                const SizedBox(width: 7),
+                                 SizedBox(width: 7.w),
                                 Text(
                                   "Player $winnerPlayer",
                                 style:TextStyle(
@@ -88,12 +90,12 @@ class GameWinScreen extends StatelessWidget {
                                 ) ,)
                              ]
                             ),
-                          const SizedBox(height: 10),
+                           SizedBox(height: 10.h),
                           Text(
                             'WINS!',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 60,
+                              fontSize: 60.sp,
                               fontWeight: FontWeight.bold,
                               color: kSecondaryColor,
                             ),
@@ -101,43 +103,44 @@ class GameWinScreen extends StatelessWidget {
                           ]
                         ),
                       ),
-                      const SizedBox(height: 30),
+                       SizedBox(height: 30.h),
                       ElevatedButton(
                         onPressed: (){
+                          GalleryStore.clear();
                           Get.back();
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: kSecondaryColor,
-                          minimumSize: const Size(double.infinity, 60),
+                          minimumSize:  Size(double.infinity, 60.h),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(30.r),
                           ),
                         ),
-                        child: const Text(
+                        child:  Text(
                           'Start New Game',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 18.sp,
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
+                       SizedBox(height: 20.h),
                       ElevatedButton(
                         onPressed: () {
                           Get.to(()=>GameModeScreen());
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: kPrimaryColor,
-                          minimumSize: const Size(double.infinity, 60),
+                          minimumSize:  Size(double.infinity, 60.h),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(30.r),
                           ),
                         ),
-                        child: const Text(
+                        child:  Text(
                           'Go to main menu',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 18.sp,
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
                           ),
