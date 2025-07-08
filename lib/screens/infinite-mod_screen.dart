@@ -65,7 +65,7 @@ class _InfiniteModScreenState extends State<InfiniteModScreen> {
                       children: [
                         Image.asset(
                           'assets/images/infinite_icon.png',
-                          height: 30.h,
+                          height: 40.h,
                         ),
                          SizedBox(width: 10.w),
                         Text(

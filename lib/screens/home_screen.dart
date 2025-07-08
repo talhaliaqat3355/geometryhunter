@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../constants.dart';
 import 'package:geometryhunter/screens/guide_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geometryhunter/controller/music_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final MusicController musicController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,15 +95,17 @@ class _HomeScreenState extends State<HomeScreen> {
             bottom: 30.h,
             child: GestureDetector(
               onTap: () {
-
-              },
-                child: Image.asset(
-                  'assets/images/music_icon.png',
+    musicController.toggleMusic();
+    },
+    child: Obx(() => Image.asset(
+    musicController.isPlaying.value
+    ? 'assets/images/music_icon.png'
+        : 'assets/images/music_off_icon.png',
                   height: 48.h,
                 ),
             ),
           ),
-
+          ),
           Positioned(
             right: 20.w,
             bottom: 30.h,

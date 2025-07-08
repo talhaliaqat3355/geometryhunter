@@ -1,12 +1,8 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:geometryhunter/constants.dart';
 import 'package:geometryhunter/screens/game-over&draw_screens/game-draw_screen.dart';
 import 'package:geometryhunter/screens/game-over&draw_screens/game-win(tic-tac-toe)_screen.dart';
-import 'package:geometryhunter/screens/select-shape_screen.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:geometryhunter/gallery_store.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TicTacToeScreen extends StatefulWidget {
@@ -17,50 +13,36 @@ class TicTacToeScreen extends StatefulWidget {
 }
 
 class _TicTacToeScreenState extends State<TicTacToeScreen> {
-  List<File?> _images = List.generate(9, (_) => null);
-  List<int?> _playerMoves = List.generate(9, (_) => null);
+  List<String?> _board = List.filled(9,  null);
   int currentPlayer = 1;
   int moveCount = 0;
 
-  final ImagePicker _picker = ImagePicker();
+  void _handleTap(int index) {
+    if (_board[index] != null) return; // already filled
 
-  Future<void> _captureImage(int index) async {
-    if (_images[index] != null) return; // Prevent overwriting existing move
+    setState(() {
+      _board[index] = currentPlayer == 1 ? "O" : "X";
+      moveCount++;
+    });
 
-    Get.to(() => SelectShapeScreen(
-      onShapeSelected: (shapeName) async {
-        Get.back();
-        final pickedFile = await _picker.pickImage(source: ImageSource.camera);
-
-        if (pickedFile != null) {
-          final File imageFile = File(pickedFile.path);
-
-          setState(() {
-            _images[index] = imageFile;
-            _playerMoves[index] = currentPlayer;
-            moveCount++;
-          });
-
-          GalleryStore.addImage(imageFile.path, shape: shapeName);
-
-          if (_checkWinner(currentPlayer)) {
-            Future.delayed(const Duration(milliseconds: 300), () {
-              Get.to(() => GameWinScreen(winnerPlayer: currentPlayer));
-            });
-          }
-          else if (moveCount == 9) {
-            Get.to(() => const GameDrawScreen());
-          } else {
-            setState(() {
-              currentPlayer = currentPlayer == 1 ? 2 : 1;
-            });
-          }
-        }
-      },
-    ));
+    if (_checkWinner(_board[index]!)) {
+      Future.delayed(const Duration(milliseconds: 300), () {
+        Get.to(() => GameWinScreen(
+          winnerPlayer: currentPlayer,
+          previousGameScreen: const TicTacToeScreen(),
+        ));
+      });
+    } else if (moveCount == 9) {
+      Get.to(() => GameDrawScreen(previousGameScreen: const TicTacToeScreen()));
+    } else {
+      setState(() {
+        currentPlayer = currentPlayer == 1 ? 2 : 1;
+      });
+    }
   }
 
-  bool _checkWinner(int player) {
+
+  bool _checkWinner(String symbol) {
     List<List<int>> winPositions = [
       [0, 1, 2],
       [3, 4, 5],
@@ -73,9 +55,9 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
     ];
 
     for (var pos in winPositions) {
-      if (_playerMoves[pos[0]] == player &&
-          _playerMoves[pos[1]] == player &&
-          _playerMoves[pos[2]] == player) {
+      if (_board[pos[0]] == symbol &&
+          _board[pos[1]] == symbol &&
+          _board[pos[2]] == symbol) {
         return true;
       }
     }
@@ -98,13 +80,13 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
               padding:  EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h ),
               child: Column(
                 children: [
-                   SizedBox(height: 50.h),
+                  SizedBox(height: 50.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset('assets/images/tic-tac_icon.png', height: 30.h),
-                       SizedBox(width: 5.w),
-                       Text(
+                      SizedBox(width: 5.w),
+                      Text(
                         "TIC TAC TOE - 3X3",
                         style: TextStyle(
                           fontSize: 20,
@@ -119,7 +101,7 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
                     color: kPrimaryColor,
 
                   ),
-                   SizedBox(height: 20.h),
+                  SizedBox(height: 20.h),
                   Stack(
                     children: [
                       Row(
@@ -147,7 +129,7 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
                     ],
                   ),
 
-                   SizedBox(height: 40.h),
+                  SizedBox(height: 40.h),
                   Expanded(
                     child: Padding(
                       padding:  EdgeInsets.symmetric(horizontal: 16.w),
@@ -167,12 +149,20 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
                                   ),
                                   itemBuilder: (context, index) {
                                     return GestureDetector(
-                                      onTap: () => _captureImage(index),
+                                      onTap: () => _handleTap(index),
                                       child: Container(
                                         color: Colors.transparent,
                                         padding:  EdgeInsets.all(12.w),
-                                        child: _images[index] != null
-                                            ? Image.file(_images[index]!, fit: BoxFit.cover)
+                                        child: _board[index] != null
+                                            ? Center(
+                                          child: Text(_board[index]!,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 48,
+                                            color: _board[index] == "O" ? Colors.blue.shade600 : Colors.red,
+                                          ),
+                                          ),
+                                        )
                                             : Image.asset('assets/images/camera_placeholder.png'),
                                       ),
                                     );
@@ -214,16 +204,19 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
                     child: ElevatedButton(
                       onPressed: () {
                         int? winner;
-                        if (_checkWinner(1)) {
+                        if (_checkWinner("O")) {
                           winner = 1;
-                        } else if (_checkWinner(2)) {
+                        } else if (_checkWinner("X")) {
                           winner = 2;
                         }
 
                         if (winner != null) {
-                          Get.to(() => GameWinScreen(winnerPlayer: winner!));
+                          Get.to(() => GameWinScreen(
+                            winnerPlayer: currentPlayer,
+                            previousGameScreen: const TicTacToeScreen(),
+                          ));
                         } else {
-                          Get.to(() => const GameDrawScreen());
+                          Get.to(() => GameDrawScreen(previousGameScreen: const TicTacToeScreen()));
                         }
                       },
 
@@ -274,7 +267,7 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
                 height: 22.h,
                 color: isActive ? Colors.white : (isPlayer1 ? Colors.blue : Colors.red),
               ),
-               SizedBox(width: 4.w),
+              SizedBox(width: 4.w),
               Text(
                 name,
                 style: TextStyle(

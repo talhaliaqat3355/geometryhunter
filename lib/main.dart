@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:geometryhunter/controller/music_controller.dart';
 import 'package:geometryhunter/screens/splash_screen.dart';
 import 'package:get/get.dart';
 import 'package:flutter/foundation.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() => runApp(
-      DevicePreview(
-        enabled: !kReleaseMode,
-        builder: (context) => MyApp(), // Wrap your app
-      ),
-      );
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Get.put(MusicController());
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => MyApp(), // Wrap your app
+    ),
+  );
+}
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

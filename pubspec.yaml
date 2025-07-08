@@ -40,6 +40,7 @@ dependencies:
   path_provider: ^2.1.5
   device_preview: ^1.2.0
   flutter_screenutil: ^5.9.3
+  audioplayers: ^6.5.0
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +59,7 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
+    - assets/audio/background_music.mp3
     - assets/images/preload.png
     - assets/images/bg.png
     - assets/images/logo.png
@@ -76,6 +78,7 @@ flutter:
     - assets/images/Square_icon.png
     - assets/images/Zigzag_icon.png
     - assets/images/Triangle_icon.png
+    - assets/images/music_off_icon.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

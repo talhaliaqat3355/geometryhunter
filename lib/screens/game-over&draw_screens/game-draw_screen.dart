@@ -3,8 +3,11 @@ import 'package:geometryhunter/constants.dart';
 import 'package:geometryhunter/screens/game_mode_screen.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geometryhunter/screens/tic-tac-3x3-gamemode_screen.dart';
+
 class GameDrawScreen extends StatefulWidget {
-  const GameDrawScreen({super.key});
+  final Widget previousGameScreen;
+  const GameDrawScreen({super.key, required this.previousGameScreen});
 
   @override
   State<GameDrawScreen> createState() => _GameDrawState();
@@ -85,7 +88,7 @@ class _GameDrawState extends State<GameDrawScreen> {
                          SizedBox(height: 30.h),
                         ElevatedButton(
                           onPressed: (){
-                            Get.back();
+                            Get.off(() => widget.previousGameScreen);
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: kSecondaryColor,

@@ -42,9 +42,11 @@ class _WhosBiggerScreenState extends State<WhosBiggerScreen> {
         int player2Count = _getPlayerImageCount(2);
 
         if (player1Count == 0 && player2Count == 0) {
-          Get.to(() => const GameDrawScreen());
+          Get.to(() => GameDrawScreen(previousGameScreen: const WhosBiggerScreen()));
+
         } else if (player1Count == player2Count) {
-          Get.to(() => const GameDrawScreen());
+          Get.to(() => GameDrawScreen(previousGameScreen: const WhosBiggerScreen()));
+
         } else {
           Get.to(() => GameWin1vs1Screen(
             player1Score: player1Count,

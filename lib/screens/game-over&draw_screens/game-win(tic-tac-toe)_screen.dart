@@ -8,7 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GameWinScreen extends StatelessWidget {
   final int winnerPlayer;
-  const GameWinScreen({super.key, required this.winnerPlayer});
+  final Widget previousGameScreen;
+  const GameWinScreen({super.key, required this.winnerPlayer, required this.previousGameScreen});
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +108,7 @@ class GameWinScreen extends StatelessWidget {
                       ElevatedButton(
                         onPressed: (){
                           GalleryStore.clear();
-                          Get.back();
+                          Get.off(() => previousGameScreen);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: kSecondaryColor,
