@@ -3,7 +3,10 @@ import 'package:geometryhunter/constants.dart';
 import 'package:geometryhunter/screens/game_mode_screen.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geometryhunter/screens/1vs1game-mod_screen.dart';
 import 'package:geometryhunter/screens/tic-tac-3x3-gamemode_screen.dart';
+import 'package:geometryhunter/gallery_store.dart';
+import 'package:geometryhunter/controller/onevsonecontroller.dart';
 
 class GameDrawScreen extends StatefulWidget {
   final Widget previousGameScreen;
@@ -87,8 +90,15 @@ class _GameDrawState extends State<GameDrawScreen> {
                         ),
                          SizedBox(height: 30.h),
                         ElevatedButton(
-                          onPressed: (){
-                            Get.off(() => widget.previousGameScreen);
+                          onPressed: () {
+                            if (widget.previousGameScreen is WhosBiggerScreen) {
+                              final OneVsOneController controller = Get.find<OneVsOneController>();
+                              controller.resetGame();
+                              Get.off(() =>  WhosBiggerScreen());
+                            } else if (widget.previousGameScreen is TicTacToeScreen) {
+                              GalleryStore.clear();
+                              Get.off(() => const TicTacToeScreen());
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: kSecondaryColor,
@@ -109,7 +119,9 @@ class _GameDrawState extends State<GameDrawScreen> {
                          SizedBox(height: 20.h),
                         ElevatedButton(
                           onPressed: () {
-                            Get.to(()=>GameModeScreen());
+                              final OneVsOneController controller = Get.find<OneVsOneController>();
+                              controller.resetGame();
+                              Get.offAll(() => GameModeScreen()); // completely reset to menu
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: kPrimaryColor,

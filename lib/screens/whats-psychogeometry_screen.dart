@@ -41,14 +41,14 @@ class _WhatsPsychogeometryScreenState extends State<WhatsPsychogeometryScreen> {
                     child:  Row(
                       children: [
                         Icon(Icons.arrow_back_ios_rounded,
-                            size: 18.sp, color: kPrimaryColor),
+                            size: 18.sp, color: kTextColor),
                         SizedBox(width: 1.w),
                         Text(
                           "BACK",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18.sp,
-                            color: kPrimaryColor,
+                            color: kTextColor,
                           ),
                         ),
                       ],
@@ -59,7 +59,7 @@ class _WhatsPsychogeometryScreenState extends State<WhatsPsychogeometryScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset('assets/images/guide_icon.png'),
+                      Image.asset('assets/images/guide_icon.png',color: kPrimaryColor,),
                       SizedBox(width: 10.w),
                       Expanded( // ensures the Text wraps within available space
                         child: Text(
@@ -67,7 +67,8 @@ class _WhatsPsychogeometryScreenState extends State<WhatsPsychogeometryScreen> {
                           softWrap: true,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 18.sp, // slightly reduced to avoid overflow
+                            color: kPrimaryColor,
+                            fontSize: 18.sp,
                             fontWeight: FontWeight.bold,
                             letterSpacing: 1.w,
                           ),
@@ -177,6 +178,7 @@ class _WhatsPsychogeometryScreenState extends State<WhatsPsychogeometryScreen> {
                   child: Text(
                     title,
                     style:  TextStyle(
+                      color: kPGContentTextColor,
                       fontSize: 22.sp,
                       fontWeight: FontWeight.bold,
                     ),
@@ -188,7 +190,7 @@ class _WhatsPsychogeometryScreenState extends State<WhatsPsychogeometryScreen> {
                   child:  Icon(
                     Icons.arrow_forward_ios,
                     size: 20.sp,
-                    color: kPrimaryColor,
+                    color: kPGContentTextColor,
                   ),
                 ),
               ],

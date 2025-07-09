@@ -29,14 +29,14 @@ class GuideScreen extends StatelessWidget {
                       onTap: () => Get.back(),
                       child:  Row(
                         children: [
-                          Icon(Icons.arrow_back_ios_rounded, size: 18.sp, color: kPrimaryColor),
+                          Icon(Icons.arrow_back_ios_rounded, size: 18.sp, color: kTextColor),
                           SizedBox(width: 1.w),
                           Text(
                             "BACK",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18.sp,
-                              color: kPrimaryColor,
+                              color: kTextColor,
                             ),
                           ),
                         ],
@@ -47,11 +47,12 @@ class GuideScreen extends StatelessWidget {
                     Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                      children: [
-                       Image.asset('assets/images/guide_icon.png'),
+                       Image.asset('assets/images/guide_icon.png',color: kPrimaryColor),
                      SizedBox(width: 4.w),
                      Text(
                           "HOW TO PLAY?",
                           style: TextStyle(
+                            color: kPrimaryColor,
                             fontSize: 24.sp,
                             fontWeight: FontWeight.bold,
                             letterSpacing: 1.w,
@@ -76,7 +77,7 @@ class GuideScreen extends StatelessWidget {
                            Text(
                             'In this mode, two players compete in a game similar to tic-tac-toe.Outsmart your opponent by forming a winning combination of different shapes!',
                             style: TextStyle(
-                              color: kPrimaryColor,
+                              color: kTextColor,
                               fontSize: 20.sp,
                               fontWeight: FontWeight.w600
                             ),
@@ -91,7 +92,7 @@ class GuideScreen extends StatelessWidget {
                            Text(
                               'This is a standard mode where you can challenge your friend in a race against time. Take turns collecting as many shapes as you can in 60 seconds!',
                             style: TextStyle(
-                                color: kPrimaryColor,
+                                color: kTextColor,
                                 fontSize: 20.sp,
                                 fontWeight: FontWeight.w600
                             ),
@@ -106,7 +107,7 @@ class GuideScreen extends StatelessWidget {
                            Text(
                             'This mode is an endless shape-finding challenge. Discover as many shapes as you can in your space — with no time limit!',
                             style: TextStyle(
-                                color: kPrimaryColor,
+                                color: kTextColor,
                                 fontSize: 20.sp,
                                 fontWeight: FontWeight.w600
                             ),

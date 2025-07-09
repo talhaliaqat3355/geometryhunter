@@ -1,8 +1,12 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:geometryhunter/constants.dart';
 import 'package:geometryhunter/screens/game-over&draw_screens/game-draw_screen.dart';
 import 'package:geometryhunter/screens/game-over&draw_screens/game-win(tic-tac-toe)_screen.dart';
+import 'package:geometryhunter/screens/select-shape_screen.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:geometryhunter/gallery_store.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TicTacToeScreen extends StatefulWidget {
@@ -13,51 +17,63 @@ class TicTacToeScreen extends StatefulWidget {
 }
 
 class _TicTacToeScreenState extends State<TicTacToeScreen> {
-  List<String?> _board = List.filled(9,  null);
+  List<File?> _images = List.generate(9, (_) => null);
+  List<int?> _playerMoves = List.generate(9, (_) => null);
   int currentPlayer = 1;
   int moveCount = 0;
 
-  void _handleTap(int index) {
-    if (_board[index] != null) return; // already filled
+  final ImagePicker _picker = ImagePicker();
 
-    setState(() {
-      _board[index] = currentPlayer == 1 ? "O" : "X";
-      moveCount++;
-    });
+  Future<void> _captureImage(int index) async {
+    if (_images[index] != null) return; // Prevent overwriting existing move
 
-    if (_checkWinner(_board[index]!)) {
-      Future.delayed(const Duration(milliseconds: 300), () {
-        Get.to(() => GameWinScreen(
-          winnerPlayer: currentPlayer,
-          previousGameScreen: const TicTacToeScreen(),
-        ));
-      });
-    } else if (moveCount == 9) {
-      Get.to(() => GameDrawScreen(previousGameScreen: const TicTacToeScreen()));
-    } else {
-      setState(() {
-        currentPlayer = currentPlayer == 1 ? 2 : 1;
-      });
-    }
+    Get.to(() => SelectShapeScreen(
+      onShapeSelected: (shapeName) async {
+        Get.back();
+        final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+
+        if (pickedFile != null) {
+          final File imageFile = File(pickedFile.path);
+
+          setState(() {
+            _images[index] = imageFile;
+            _playerMoves[index] = currentPlayer;
+            moveCount++;
+          });
+
+          GalleryStore.addImage(imageFile.path, shape: shapeName);
+
+          if (_checkWinner(currentPlayer)) {
+            Future.delayed(const Duration(milliseconds: 300), () {
+              Get.to(() => GameWinScreen(winnerPlayer: currentPlayer,
+                previousGameScreen: const TicTacToeScreen(),));
+            });
+          }
+          else if (moveCount == 9) {
+            Get.to(() => GameDrawScreen(previousGameScreen: const TicTacToeScreen()));
+
+          } else {
+            setState(() {
+              currentPlayer = currentPlayer == 1 ? 2 : 1;
+            });
+          }
+        }
+      },
+    ));
   }
 
-
-  bool _checkWinner(String symbol) {
+  bool _checkWinner(int player) {
     List<List<int>> winPositions = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
+      [0, 1, 2], [3, 4, 5],
+      [6, 7, 8], [0, 3, 6],
+      [1, 4, 7], [2, 5, 8],
+      [0, 4, 8], [2, 4, 6],
     ];
 
     for (var pos in winPositions) {
-      if (_board[pos[0]] == symbol &&
-          _board[pos[1]] == symbol &&
-          _board[pos[2]] == symbol) {
+      if (_playerMoves[pos[0]] == player &&
+          _playerMoves[pos[1]] == player &&
+          _playerMoves[pos[2]] == player) {
         return true;
       }
     }
@@ -149,20 +165,12 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
                                   ),
                                   itemBuilder: (context, index) {
                                     return GestureDetector(
-                                      onTap: () => _handleTap(index),
+                                      onTap: () => _captureImage(index),
                                       child: Container(
                                         color: Colors.transparent,
                                         padding:  EdgeInsets.all(12.w),
-                                        child: _board[index] != null
-                                            ? Center(
-                                          child: Text(_board[index]!,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 48,
-                                            color: _board[index] == "O" ? Colors.blue.shade600 : Colors.red,
-                                          ),
-                                          ),
-                                        )
+                                        child: _images[index] != null
+                                            ? Image.file(_images[index]!, fit: BoxFit.cover)
                                             : Image.asset('assets/images/camera_placeholder.png'),
                                       ),
                                     );
@@ -204,19 +212,21 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
                     child: ElevatedButton(
                       onPressed: () {
                         int? winner;
-                        if (_checkWinner("O")) {
+                        if (_checkWinner(1)) {
                           winner = 1;
-                        } else if (_checkWinner("X")) {
+                        } else if (_checkWinner(2)) {
                           winner = 2;
                         }
 
                         if (winner != null) {
                           Get.to(() => GameWinScreen(
-                            winnerPlayer: currentPlayer,
+                            winnerPlayer: winner!,
                             previousGameScreen: const TicTacToeScreen(),
                           ));
+
                         } else {
                           Get.to(() => GameDrawScreen(previousGameScreen: const TicTacToeScreen()));
+
                         }
                       },
 

@@ -35,8 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
                    SizedBox(height: 40.h),
                     Image.asset(
                      'assets/images/logo.png',
-                       height: 220.h,
-                      width: 220.w,
+                       height: 240.h,
+                      width: 240.w,
                      ),
                   SizedBox(height: 50.h),
                   Padding(padding: EdgeInsets.symmetric(horizontal: 20),
@@ -48,18 +48,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: kSecondaryColor,
-                          minimumSize:  Size(double.infinity, 60.h),
+                          minimumSize:  Size(double.infinity, 70.h),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.r),
                           ),
                         ),
                           child:  Text(
                             'Start New Game',
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          ),
+                        style: kStartNewGameTextColor
                       ),
                       ),
                        SizedBox(height: 20.h),
@@ -69,18 +65,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: kPrimaryColor,
-                          minimumSize:  Size(double.infinity, 60.h),
+                          minimumSize:  Size(double.infinity, 70.h),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.r),
                           ),
                         ),
                         child:  Text(
                           'Gallery',
-                          style: TextStyle(
-                            fontSize: 18.sp,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style: kGalleryTextColor
                         ),
                       ),
                     ],
