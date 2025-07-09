@@ -10,6 +10,7 @@ import 'package:geometryhunter/gallery_store.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:geometryhunter/screens/game-over&draw_screens/game-over-infinite_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geometryhunter/screens/photo-preview_screen.dart';
 
 class InfiniteModScreen extends StatefulWidget {
   const InfiniteModScreen({super.key});
@@ -23,26 +24,33 @@ class _InfiniteModScreenState extends State<InfiniteModScreen> {
   List<File> _images = [];
 
   Future<void> _takePhoto() async {
-
     Get.to(() => SelectShapeScreen(onShapeSelected: (shape) async {
       Get.back(); // Close shape picker
 
       final pickedFile = await _picker.pickImage(source: ImageSource.camera);
       if (pickedFile != null) {
-        final appDir = await getApplicationDocumentsDirectory();
-        final fileName = 'img_${DateTime.now().millisecondsSinceEpoch}.jpg';
-        final savedPath = path.join(appDir.path, fileName);
-        final File imageFile = await File(pickedFile.path).copy(savedPath);
+        final File imageFile = File(pickedFile.path);
 
-        GalleryStore.addImage(imageFile.path, shape: shape);
+        Get.to(() => PhotoPreviewScreen(
+          imageFile: imageFile,
+          shapeName: shape,
+          onUsePhoto: () async {
+            final appDir = await getApplicationDocumentsDirectory();
+            final fileName = 'img_${DateTime.now().millisecondsSinceEpoch}.jpg';
+            final savedPath = path.join(appDir.path, fileName);
+            final File savedImage = await imageFile.copy(savedPath);
 
-        // Step 4: Update UI
-        setState(() {
-          _images.add(imageFile);
-        });
+            GalleryStore.addImage(savedImage.path, shape: shape);
+            setState(() {
+              _images.add(savedImage);
+            });
+            Get.back(); // Close preview screen
+          },
+        ));
       }
     }));
   }
+
 
   @override
   Widget build(BuildContext context) {
