@@ -7,12 +7,12 @@ const kPlayerColor = Color(0xFF2874E6);
 const kDrawTextColor = Color(0xFF5B5B5B);
 const kTextColor = Color(0xFF000000);
 const kPGContentTextColor = Color(0xFF141414);
-final kGalleryTextColor = TextStyle(
+final kGalleryTextStyle = TextStyle(
   fontSize: 18.sp,
   color: Colors.white,
   fontWeight: FontWeight.w600,
 );
-final kStartNewGameTextColor =TextStyle(
+final kStartNewGameTextStyle =TextStyle(
   fontSize: 18.sp,
   color: Colors.white,
   fontWeight: FontWeight.w600,

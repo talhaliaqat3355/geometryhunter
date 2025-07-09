@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                           child:  Text(
                             'Start New Game',
-                        style: kStartNewGameTextColor
+                        style: kStartNewGameTextStyle
                       ),
                       ),
                        SizedBox(height: 20.h),
@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         child:  Text(
                           'Gallery',
-                          style: kGalleryTextColor
+                          style: kGalleryTextStyle
                         ),
                       ),
                     ],

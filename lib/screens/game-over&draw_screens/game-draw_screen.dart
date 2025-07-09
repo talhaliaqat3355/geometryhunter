@@ -93,7 +93,7 @@ class _GameDrawState extends State<GameDrawScreen> {
                           onPressed: () {
                             if (widget.previousGameScreen is WhosBiggerScreen) {
                               final OneVsOneController controller = Get.find<OneVsOneController>();
-                              controller.resetGame();
+                              controller.resetGame() ;
                               Get.off(() =>  WhosBiggerScreen());
                             } else if (widget.previousGameScreen is TicTacToeScreen) {
                               GalleryStore.clear();

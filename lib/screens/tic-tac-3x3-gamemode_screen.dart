@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:geometryhunter/gallery_store.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geometryhunter/screens/photo-preview_screen.dart';
 
 class TicTacToeScreen extends StatefulWidget {
   const TicTacToeScreen({super.key});
@@ -25,42 +26,50 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
   final ImagePicker _picker = ImagePicker();
 
   Future<void> _captureImage(int index) async {
-    if (_images[index] != null) return; // Prevent overwriting existing move
+    if (_images[index] != null) return;
 
     Get.to(() => SelectShapeScreen(
       onShapeSelected: (shapeName) async {
         Get.back();
         final pickedFile = await _picker.pickImage(source: ImageSource.camera);
-
         if (pickedFile != null) {
-          final File imageFile = File(pickedFile.path);
+          final imageFile = File(pickedFile.path);
 
-          setState(() {
-            _images[index] = imageFile;
-            _playerMoves[index] = currentPlayer;
-            moveCount++;
-          });
+          // Navigate to Preview Screen
+          Get.to(() => PhotoPreviewScreen(
+            imageFile: imageFile,
+            shapeName: shapeName,
+            onUsePhoto: () {
+              Get.back(); // Close preview
+              setState(() {
+                _images[index] = imageFile;
+                _playerMoves[index] = currentPlayer;
+                moveCount++;
+              });
 
-          GalleryStore.addImage(imageFile.path, shape: shapeName);
+              GalleryStore.addImage(imageFile.path, shape: shapeName);
 
-          if (_checkWinner(currentPlayer)) {
-            Future.delayed(const Duration(milliseconds: 300), () {
-              Get.to(() => GameWinScreen(winnerPlayer: currentPlayer,
-                previousGameScreen: const TicTacToeScreen(),));
-            });
-          }
-          else if (moveCount == 9) {
-            Get.to(() => GameDrawScreen(previousGameScreen: const TicTacToeScreen()));
-
-          } else {
-            setState(() {
-              currentPlayer = currentPlayer == 1 ? 2 : 1;
-            });
-          }
+              if (_checkWinner(currentPlayer)) {
+                Future.delayed(const Duration(milliseconds: 300), () {
+                  Get.to(() => GameWinScreen(
+                    winnerPlayer: currentPlayer,
+                    previousGameScreen: const TicTacToeScreen(),
+                  ));
+                });
+              } else if (moveCount == 9) {
+                Get.to(() => GameDrawScreen(previousGameScreen: const TicTacToeScreen()));
+              } else {
+                setState(() {
+                  currentPlayer = currentPlayer == 1 ? 2 : 1;
+                });
+              }
+            },
+          ));
         }
       },
     ));
   }
+
 
   bool _checkWinner(int player) {
     List<List<int>> winPositions = [
