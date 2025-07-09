@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:geometryhunter/constants.dart';
 import 'package:get/get.dart';
+import 'package:geometryhunter/constants.dart';
 import '../gallery_store.dart';
 import 'package:geometryhunter/controller/onevsonecontroller.dart';
 import 'package:geometryhunter/screens/select-shape_screen.dart';
@@ -32,49 +32,59 @@ class WhosBiggerScreen extends StatelessWidget {
             child: Image.asset('assets/images/bg.png', fit: BoxFit.cover),
           ),
           SafeArea(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
-              child: Column(
-                children: [
-                  SizedBox(height: 20.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('assets/images/sword_icon.png', height: 40.h),
-                      SizedBox(width: 8.w),
-                      Text("1 VS 1", style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold, color: kPrimaryColor)),
-                    ],
+            child: Column(
+              children: [
+                // scrollable part
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        SizedBox(height: 20.h),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset('assets/images/sword_icon.png', height: 40.h),
+                            SizedBox(width: 8.w),
+                            Text("1 VS 1", style: k1vs1TextStyle
+                            ),
+                          ],
+                        ),
+                        const Divider(color: kPrimaryColor),
+                        SizedBox(height: 20.h),
+
+                        Obx(() => _buildTimerBar(context)),
+                        SizedBox(height: 20.h),
+                        Obx(() => _buildPlayersRow()),
+                        SizedBox(height: 30.h),
+                      ],
+                    ),
                   ),
-                  const Divider(color: kPrimaryColor),
-                  SizedBox(height: 20.h),
+                ),
 
-                  Obx(() => _buildTimerBar(context)),
-
-                  SizedBox(height: 20.h),
-
-                  Obx(() => _buildPlayersRow()),
-
-                  const Spacer(),
-
-                  ElevatedButton(
+                // pinned bottom button
+                Padding(
+                  padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 12.h),
+                  child: ElevatedButton(
                     onPressed: () {
                       controller.resetGame();
                       Get.back();
                     },
                     style: ElevatedButton.styleFrom(
-                      minimumSize: Size(double.infinity, 60.h),
+                      minimumSize: Size(double.infinity, 70.h),
                       backgroundColor: kPrimaryColor,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.r)),
+                        borderRadius: BorderRadius.circular(30.r),
+                      ),
                     ),
                     child: Text(
-                        "End game",
-                        style: TextStyle(color: Colors.white, fontSize: 18.sp)
+                      "End game",
+                      style: kEndGameButtonTextStyle
                     ),
                   ),
-                  SizedBox(height: 10.h),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],
@@ -88,17 +98,26 @@ class WhosBiggerScreen extends StatelessWidget {
         Container(
           height: 42.h,
           width: double.infinity,
-          decoration: BoxDecoration(color: kPrimaryColor, borderRadius: BorderRadius.circular(20.r)),
+          decoration: BoxDecoration(
+            color: kPrimaryColor,
+            borderRadius: BorderRadius.circular(20.r),
+          ),
         ),
         AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           height: 42.h,
           width: MediaQuery.of(context).size.width * (controller.secondsLeft.value / 60),
-          decoration: BoxDecoration(color: kSecondaryColor, borderRadius: BorderRadius.circular(20.r)),
+          decoration: BoxDecoration(
+            color: kSecondaryColor,
+            borderRadius: BorderRadius.circular(20.r),
+          ),
         ),
         Positioned.fill(
           child: Center(
-            child: Text("${controller.secondsLeft.value} SEC", style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            child: Text(
+              "${controller.secondsLeft.value} SEC",
+              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
           ),
         ),
       ],
@@ -113,8 +132,6 @@ class WhosBiggerScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _playerColumn("Player 1", 1, controller.player1ImagePath),
-
-        // Center Widget
         Expanded(
           child: Column(
             children: [
@@ -129,20 +146,15 @@ class WhosBiggerScreen extends StatelessWidget {
                     color: kPrimaryColor,
                   ),
                 )
-                    : Image.asset(
-                  'assets/images/triangle-shape_icon.png',
-                  height: 30.h,
-                ),
+                    : Image.asset('assets/images/triangle-shape_icon.png', height: 30.h),
               ),
             ],
           ),
         ),
-
         _playerColumn("Player 2", 2, controller.player2ImagePath),
       ],
     );
   }
-
 
   Widget _playerColumn(String name, int number, String? imagePath) {
     bool isActive = controller.currentPlayer.value == number;
@@ -153,7 +165,9 @@ class WhosBiggerScreen extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
           decoration: BoxDecoration(
-            color: isActive ? (isPlayer1 ? Colors.blue.shade600 : Colors.red.shade600) : Colors.transparent,
+            color: isActive
+                ? (isPlayer1 ? Colors.blue.shade600 : Colors.red.shade600)
+                : Colors.transparent,
             borderRadius: BorderRadius.circular(14.r),
           ),
           child: Row(
@@ -201,12 +215,14 @@ class WhosBiggerScreen extends StatelessWidget {
         if (isActive)
           GestureDetector(
             onTap: () {
-              Get.to(() => SelectShapeScreen(onShapeSelected: (shape) async {
-                Get.back();
-                await controller.takeTurn((imagePath) {
-                  // trigger UI update if needed
-                }, shape);
-              }));
+              Get.to(() => SelectShapeScreen(
+                onShapeSelected: (shape) async {
+                  Get.back();
+                  await controller.takeTurn((imagePath) {
+                    // optional: trigger UI update
+                  }, shape);
+                },
+              ));
             },
             child: Padding(
               padding: EdgeInsets.only(top: 10.h),

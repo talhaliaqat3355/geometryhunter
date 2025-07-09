@@ -28,19 +28,24 @@ class GameWin1vs1Screen extends StatelessWidget {
         SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-            child: Column(children: [
-              SizedBox(height: 40.h),
-              _gameOverBanner(),
-              SizedBox(height: 20.h),
-              _winnerBox(winner),
-              SizedBox(height: 30.h),
-              _startNewGameButton(),
-              SizedBox(height: 20.h),
-              _mainMenuButton(),
-            ]),
+            child: SingleChildScrollView(
+              child: ConstrainedBox(constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height),
+              child: Column(children: [
+                SizedBox(height: 40.h),
+                _gameOverBanner(),
+                SizedBox(height: 20.h),
+                _winnerBox(winner),
+                SizedBox(height: 30.h),
+                _startNewGameButton(),
+                SizedBox(height: 20.h),
+                _mainMenuButton(),
+              ]),
+            ),
           ),
         ),
-      ]),
+        )
+       ]
+      ),
     );
   }
 
@@ -131,7 +136,7 @@ class GameWin1vs1Screen extends StatelessWidget {
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: kSecondaryColor,
-        minimumSize: Size(double.infinity, 60.h),
+        minimumSize: Size(double.infinity, 70.h),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.r),
         ),
@@ -156,7 +161,7 @@ class GameWin1vs1Screen extends StatelessWidget {
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: kPrimaryColor,
-        minimumSize: Size(double.infinity, 60.h),
+        minimumSize: Size(double.infinity, 70.h),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.r),
         ),

@@ -70,7 +70,6 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
     ));
   }
 
-
   bool _checkWinner(int player) {
     List<List<int>> winPositions = [
       [0, 1, 2], [3, 4, 5],
@@ -101,162 +100,149 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
             ),
           ),
           SafeArea(
-            child: Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h ),
-              child: Column(
-                children: [
-                  SizedBox(height: 50.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('assets/images/tic-tac_icon.png', height: 30.h),
-                      SizedBox(width: 5.w),
-                      Text(
-                        "TIC TAC TOE - 3X3",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.w,
-                          color: kPrimaryColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Divider(
-                    color: kPrimaryColor,
-
-                  ),
-                  SizedBox(height: 20.h),
-                  Stack(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+            child: Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
+                      child: Column(
                         children: [
-                          _PlayerTag("Player 1", 1),
-                          _PlayerTag("Player 2", 2),
-                        ],
-                      ),
+                          SizedBox(height: 50.h),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset('assets/images/tic-tac_icon.png', height: 30.h),
+                              SizedBox(width: 5.w),
+                              Text(
+                                "TIC TAC TOE - 3X3",
+                                style: kTicTacToeTextStyle
+                              ),
+                            ],
+                          ),
+                          const Divider(color: kPrimaryColor),
+                          SizedBox(height: 20.h),
+                          Stack(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _PlayerTag("Player 1", 1),
+                                  _PlayerTag("Player 2", 2),
+                                ],
+                              ),
+                              if (currentPlayer == 1)
+                                Positioned(
+                                  left: 0,
+                                  right: 0,
+                                  top: 0,
+                                  child: Center(
+                                    child: Image.asset(
+                                      'assets/images/triangle-shape_icon.png',
+                                      height: 40.h,
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
+                          SizedBox(height: 40.h),
+                          AspectRatio(
+                            aspectRatio: 1,
+                            child: LayoutBuilder(
+                              builder: (context, constraints) {
+                                double cellSize = constraints.maxWidth / 3;
 
-                      // Triangle positioned in center
-                      if (currentPlayer == 1)
-                        Positioned(
-                          left: 0,
-                          right: 0,
-                          top: 0,
-                          child: Center(
-                            child: Image.asset(
-                              'assets/images/triangle-shape_icon.png',
-                              height: 40.h,
+                                return Stack(
+                                  children: [
+                                    GridView.builder(
+                                      physics: const NeverScrollableScrollPhysics(),
+                                      itemCount: 9,
+                                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 3,
+                                      ),
+                                      itemBuilder: (context, index) {
+                                        return GestureDetector(
+                                          onTap: () => _captureImage(index),
+                                          child: Container(
+                                            color: Colors.transparent,
+                                            padding: EdgeInsets.all(12.w),
+                                            child: _images[index] != null
+                                                ? Image.file(_images[index]!, fit: BoxFit.cover)
+                                                : Image.asset('assets/images/camera_placeholder.png'),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    // Dividers
+                                    Positioned(
+                                      top: cellSize - 1,
+                                      left: 0,
+                                      right: 0,
+                                      child: Container(height: 2.h, color: kPrimaryColor),
+                                    ),
+                                    Positioned(
+                                      top: (cellSize * 2) - 1,
+                                      left: 0,
+                                      right: 0,
+                                      child: Container(height: 2.h, color: kPrimaryColor),
+                                    ),
+                                    Positioned(
+                                      left: cellSize - 1,
+                                      top: 0,
+                                      bottom: 0,
+                                      child: Container(width: 2.w, color: kPrimaryColor),
+                                    ),
+                                    Positioned(
+                                      left: (cellSize * 2) - 1,
+                                      top: 0,
+                                      bottom: 0,
+                                      child: Container(width: 2.w, color: kPrimaryColor),
+                                    ),
+                                  ],
+                                );
+                              },
                             ),
                           ),
-                        ),
-                    ],
-                  ),
-
-                  SizedBox(height: 40.h),
-                  Expanded(
-                    child: Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: 16.w),
-                      child: AspectRatio(
-                        aspectRatio: 1,
-                        child: LayoutBuilder(
-                          builder: (context, constraints) {
-                            double cellSize = constraints.maxWidth / 3;
-
-                            return Stack(
-                              children: [
-                                GridView.builder(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: 9,
-                                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
-                                  ),
-                                  itemBuilder: (context, index) {
-                                    return GestureDetector(
-                                      onTap: () => _captureImage(index),
-                                      child: Container(
-                                        color: Colors.transparent,
-                                        padding:  EdgeInsets.all(12.w),
-                                        child: _images[index] != null
-                                            ? Image.file(_images[index]!, fit: BoxFit.cover)
-                                            : Image.asset('assets/images/camera_placeholder.png'),
-                                      ),
-                                    );
-                                  },
-                                ),
-                                Positioned(
-                                  top: cellSize - 1,
-                                  left: 0,
-                                  right: 0,
-                                  child: Container(height: 2.h, color: kPrimaryColor),
-                                ),
-                                Positioned(
-                                  top: (cellSize * 2) - 1,
-                                  left: 0,
-                                  right: 0,
-                                  child: Container(height: 2.h, color: kPrimaryColor),
-                                ),
-                                Positioned(
-                                  left: cellSize - 1,
-                                  top: 0,
-                                  bottom: 150.h,
-                                  child: Container(width: 2.w, color: kPrimaryColor),
-                                ),
-                                Positioned(
-                                  left: (cellSize * 2) - 1,
-                                  top: 0,
-                                  bottom: 150.h,
-                                  child: Container(width: 2.w, color: kPrimaryColor),
-                                ),
-                              ],
-                            );
-                          },
-                        ),
+                        ],
                       ),
                     ),
                   ),
-                  Padding(
-                    padding:  EdgeInsets.only(bottom: 20.h),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        int? winner;
-                        if (_checkWinner(1)) {
-                          winner = 1;
-                        } else if (_checkWinner(2)) {
-                          winner = 2;
-                        }
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10.h, left: 20.w, right: 20.w),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      int? winner;
+                      if (_checkWinner(1)) {
+                        winner = 1;
+                      } else if (_checkWinner(2)) {
+                        winner = 2;
+                      }
 
-                        if (winner != null) {
-                          Get.to(() => GameWinScreen(
-                            winnerPlayer: winner!,
-                            previousGameScreen: const TicTacToeScreen(),
-                          ));
-
-                        } else {
-                          Get.to(() => GameDrawScreen(previousGameScreen: const TicTacToeScreen()));
-
-                        }
-                      },
-
-                      style: ElevatedButton.styleFrom(
-                        minimumSize:  Size(double.infinity, 60.h),
-                        backgroundColor: kPrimaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.r),
-                        ),
-                      ),
-                      child:  Text(
-                        "End game",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.sp,
-                        ),
+                      if (winner != null) {
+                        Get.to(() => GameWinScreen(
+                          winnerPlayer: winner!,
+                          previousGameScreen: const TicTacToeScreen(),
+                        ));
+                      } else {
+                        Get.to(() => GameDrawScreen(previousGameScreen: const TicTacToeScreen()));
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(double.infinity, 70.h),
+                      backgroundColor: kPrimaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.r),
                       ),
                     ),
-                  )
-                ],
-              ),
+                    child: Text(
+                      "End game",
+                      style: kEndGameButtonTextStyle
+                    ),
+                  ),
+                )
+              ],
             ),
           ),
         ],
@@ -274,7 +260,7 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
     return Column(
       children: [
         Container(
-          padding:  EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
           decoration: BoxDecoration(
             color: isActive ? activeColor : Colors.transparent,
             borderRadius: BorderRadius.circular(14.r),
@@ -300,7 +286,7 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
         ),
         if (isActive)
           Padding(
-            padding:  EdgeInsets.only(top: 10.h),
+            padding: EdgeInsets.only(top: 10.h),
             child: Text(
               "Your move!",
               style: TextStyle(

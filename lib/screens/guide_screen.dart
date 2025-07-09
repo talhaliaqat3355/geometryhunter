@@ -121,7 +121,7 @@ class GuideScreen extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: kSecondaryColor,
-                        minimumSize:  Size(double.infinity, 60.h),
+                        minimumSize:  Size(double.infinity, 70.h),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.r),
                         ),

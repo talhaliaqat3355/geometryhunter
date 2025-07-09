@@ -30,55 +30,62 @@ class _HomeScreenState extends State<HomeScreen> {
           SafeArea(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                child: Column(
-                children: [
-                   SizedBox(height: 40.h),
-                    Image.asset(
-                     'assets/images/logo.png',
-                       height: 240.h,
-                      width: 240.w,
-                     ),
-                  SizedBox(height: 50.h),
-                  Padding(padding: EdgeInsets.symmetric(horizontal: 20),
+                child: SingleChildScrollView(
+                  child :ConstrainedBox(constraints: BoxConstraints(
+                  minHeight: MediaQuery.of(context).size.height
+                        ),
                   child: Column(
-                    children: [
-                      ElevatedButton(
-                        onPressed: (){
-                        Get.to(() => GameModeScreen());
-                      },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: kSecondaryColor,
-                          minimumSize:  Size(double.infinity, 70.h),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.r),
-                          ),
-                        ),
-                          child:  Text(
-                            'Start New Game',
-                        style: kStartNewGameTextStyle
-                      ),
-                      ),
-                       SizedBox(height: 20.h),
-                      ElevatedButton(
-                        onPressed: () {
-                          Get.to(()=>GalleryScreen());
+                  children: [
+                     SizedBox(height: 40.h),
+                      Image.asset(
+                       'assets/images/logo.png',
+                         height: 240.h,
+                        width: 240.w,
+                       ),
+                  SizedBox(height: 50.h),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      children: [
+                        ElevatedButton(
+                          onPressed: (){
+                          Get.to(() => GameModeScreen());
                         },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: kPrimaryColor,
-                          minimumSize:  Size(double.infinity, 70.h),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.r),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: kSecondaryColor,
+                            minimumSize:  Size(double.infinity, 70.h),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.r),
+                            ),
+                          ),
+                            child:  Text(
+                              'Start New Game',
+                          style: kStartNewGameTextStyle
+                        ),
+                        ),
+                         SizedBox(height: 20.h),
+                        ElevatedButton(
+                          onPressed: () {
+                            Get.to(()=>GalleryScreen());
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: kPrimaryColor,
+                            minimumSize:  Size(double.infinity, 70.h),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.r),
+                            ),
+                          ),
+                          child:  Text(
+                            'Gallery',
+                            style: kGalleryTextStyle
                           ),
                         ),
-                        child:  Text(
-                          'Gallery',
-                          style: kGalleryTextStyle
-                        ),
-                      ),
-                    ],
-                   ),
+                      ],
+                     ),
+                    )
+                   ]
+                  ),
                   )
-                 ]
                 ),
               )
              ),

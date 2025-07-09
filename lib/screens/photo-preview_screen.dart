@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:geometryhunter/constants.dart'; 
+import 'package:geometryhunter/constants.dart';
 
 class PhotoPreviewScreen extends StatelessWidget {
   final File imageFile;
@@ -22,21 +22,22 @@ class PhotoPreviewScreen extends StatelessWidget {
       body: Stack(
         children: [
           Positioned.fill(child: Image.file(imageFile, fit: BoxFit.cover)),
+
+          // UI Overlay
           SafeArea(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       InkWell(
                         onTap: () => Get.back(),
-                        child:  Row(
+                        child: Row(
                           children: [
                             Icon(Icons.arrow_back_ios_rounded, size: 18.sp, color: kTextColor),
-                            SizedBox(width: 1.w),
+                            SizedBox(width: 2.w),
                             Text(
                               "BACK",
                               style: TextStyle(
@@ -48,11 +49,23 @@ class PhotoPreviewScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Text("YOUR SHAPE: $shapeName", style: TextStyle(color: kSecondaryColor, fontSize: 14.sp, fontWeight: FontWeight.bold)),
+                      Text(
+                        "YOUR SHAPE: $shapeName",
+                        style: TextStyle(
+                          color: kSecondaryColor,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
-                  const Spacer(),
-                  Column(
+                ),
+
+                const Spacer(),
+
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+                  child: Column(
                     children: [
                       ElevatedButton(
                         onPressed: onUsePhoto,
@@ -60,45 +73,45 @@ class PhotoPreviewScreen extends StatelessWidget {
                           backgroundColor: kSecondaryColor,
                           minimumSize: Size(double.infinity, 70.h),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.r)
-                          )
+                            borderRadius: BorderRadius.circular(30.r),
+                          ),
                         ),
-                        child:  Text(
-                            "Use this photo",
+                        child: Text(
+                          "Use this photo",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 18.sp,
                           ),
                         ),
                       ),
-                      SizedBox(height: 10.h),
+                      SizedBox(height: 15.h),
                       ElevatedButton(
-                        onPressed: () => Get.back(), // return to camera
+                        onPressed: () => Get.back(),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: kPrimaryColor,
                           minimumSize: Size(double.infinity, 70.h),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30)
-                          )
+                            borderRadius: BorderRadius.circular(30.r),
+                          ),
                         ),
-                        child:  Text(
-                            "Take a new one",
+                        child: Text(
+                          "Take a new one",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 18.sp,
                           ),
                         ),
                       ),
-                      SizedBox(height: 20.h),
                     ],
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
-          )
+          ),
         ],
       ),
     );
   }
 }
+
 

@@ -38,11 +38,7 @@ class GameModeScreen extends StatelessWidget {
                         SizedBox(width: 1.w),
                         Text(
                           "BACK",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.sp,
-                            color: kPrimaryColor,
-                          ),
+                          style: kBackButtonTextStyle
                         ),
                       ],
                     ),
@@ -52,11 +48,7 @@ class GameModeScreen extends StatelessWidget {
                    Center(
                     child: Text(
                       "SELECT A MOD",
-                      style: TextStyle(
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1,
-                      ),
+                      style: kSelectModTextStyle
                     ),
                   ),
                    SizedBox(height: 40.h),
@@ -119,11 +111,7 @@ class GameModeScreen extends StatelessWidget {
              SizedBox(height: 10.h),
             Text(
               title,
-              style:  TextStyle(
-                fontSize: 26.sp,
-                color: kPrimaryColor,
-                fontWeight: FontWeight.bold,
-              ),
+              style: kBuildGameModTitleTextStyle
             ),
           ],
         ),

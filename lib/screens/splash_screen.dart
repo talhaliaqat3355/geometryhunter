@@ -24,13 +24,18 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kPrimaryColor,
-      body: Center(
-                    child: Image.asset(
-                      'assets/images/preload.png',
-                      width: 250.w,
-                      height: 250.h,
+      body: SingleChildScrollView(
+        child:ConstrainedBox(
+          constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height ),
+        child: Center(
+                      child: Image.asset(
+                        'assets/images/preload.png',
+                        width: 250.w,
+                        height: 250.h,
+                      ),
                     ),
-                  ),
+    )
+    ),
     );
   }
 }
