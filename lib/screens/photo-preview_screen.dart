@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
+import 'package:image_picker/image_picker.dart';
 import '../constants.dart';
 
 class PhotoPreviewScreen extends StatelessWidget {
@@ -87,7 +87,22 @@ class PhotoPreviewScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 15.h),
                       ElevatedButton(
-                        onPressed: () => Get.back(),
+                        onPressed: () async {
+                          // Reopen camera directly
+                          final pickedFile = await ImagePicker().pickImage(source: ImageSource.camera);
+
+                          if (pickedFile != null) {
+                            final File newImageFile = File(pickedFile.path);
+
+                            // Replace this preview screen with a new one
+                            Get.off(() => PhotoPreviewScreen(
+                              imageFile: newImageFile,
+                              shapeName: shapeName, // reuse previously selected shape
+                              onUsePhoto: onUsePhoto, // reuse original callback
+                            ));
+                          }
+                        },
+
                         style: ElevatedButton.styleFrom(
                           backgroundColor: kPrimaryColor,
                           minimumSize: Size(double.infinity, 70.h),

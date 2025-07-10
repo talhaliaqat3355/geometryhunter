@@ -3,6 +3,9 @@ import 'package:GH0406/screens/photo-preview_screen.dart';
 import 'package:GH0406/screens/select-shape_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -40,15 +43,22 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
           Get.to(() => PhotoPreviewScreen(
             imageFile: imageFile,
             shapeName: shapeName,
-            onUsePhoto: () {
+            onUsePhoto: () async {
               Get.back(); // Close preview
+
+              final appDir = await getApplicationDocumentsDirectory();
+              final fileName = 'img_${DateTime.now().millisecondsSinceEpoch}.jpg';
+              final savedPath = path.join(appDir.path, fileName);
+              final savedImage = await imageFile.copy(savedPath);
+
               setState(() {
-                _images[index] = imageFile;
+                _images[index] = savedImage;
                 _playerMoves[index] = currentPlayer;
                 moveCount++;
               });
 
-              GalleryStore.addImage(imageFile.path, shape: shapeName);
+              GalleryStore.addImage(savedImage.path, shape: shapeName);
+
 
               if (_checkWinner(currentPlayer)) {
                 Future.delayed(const Duration(milliseconds: 300), () {

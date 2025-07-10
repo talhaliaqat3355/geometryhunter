@@ -203,33 +203,45 @@ class WhosBiggerScreen extends StatelessWidget {
             ),
           ),
         SizedBox(height: 20.h),
-        if (imagePath != null)
-          Container(
-            width: 80.w,
-            height: 60.h,
-            decoration: BoxDecoration(
-              border: Border.all(color: kPlayerColor, width: 2.w),
-              borderRadius: BorderRadius.circular(8.r),
-            ),
-            child: Image.file(File(imagePath), fit: BoxFit.cover),
+
+        // Fixed height container for both players
+        Container(
+          height: 130.h,
+          child: Column(
+            children: [
+              // Image container (always shown if exists)
+              if (imagePath != null)
+                Container(
+                  width: 80.w,
+                  height: 60.h,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: kPlayerColor, width: 2.w),
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: Image.file(File(imagePath), fit: BoxFit.cover),
+                ),
+              SizedBox(height: 10.h),
+
+              if (isActive)
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => SelectShapeScreen(
+                      onShapeSelected: (shape) async {
+                        Get.back();
+                        await controller.takeTurn((imagePath) {
+                          // optional: trigger UI update
+                        }, shape);
+                      },
+                    ));
+                  },
+                  child: Image.asset('assets/images/camera_placeholder.png', height: 60.h),
+                )
+              else
+              // Empty space to match active player's camera height
+                SizedBox(height: 60.h),
+            ],
           ),
-        if (isActive)
-          GestureDetector(
-            onTap: () {
-              Get.to(() => SelectShapeScreen(
-                onShapeSelected: (shape) async {
-                  Get.back();
-                  await controller.takeTurn((imagePath) {
-                    // optional: trigger UI update
-                  }, shape);
-                },
-              ));
-            },
-            child: Padding(
-              padding: EdgeInsets.only(top: 10.h),
-              child: Image.asset('assets/images/camera_placeholder.png', height: 60.h),
-            ),
-          ),
+        ),
       ],
     );
   }
