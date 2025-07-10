@@ -1,11 +1,13 @@
+import 'package:GH0406/screens/tic-tac-3x3-gamemode_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:geometryhunter/constants.dart';
-import 'package:geometryhunter/screens/home_screen.dart';
-import 'package:geometryhunter/screens/infinite-mod_screen.dart';
-import 'package:geometryhunter/screens/tic-tac-3x3-gamemode_screen.dart';
+
 import 'package:get/get.dart';
-import 'package:geometryhunter/screens/1vs1game-mod_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../constants.dart';
+import '1vs1game-mod_screen.dart';
+import 'home_screen.dart';
+import 'infinite-mod_screen.dart';
 
 class GameModeScreen extends StatelessWidget {
   const GameModeScreen({super.key});

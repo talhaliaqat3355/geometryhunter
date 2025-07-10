@@ -1,13 +1,14 @@
 import 'dart:io';
+import 'package:GH0406/screens/select-shape_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:geometryhunter/constants.dart';
+import '../constants.dart';
+import '../controller/onevsonecontroller.dart';
 import '../gallery_store.dart';
-import 'package:geometryhunter/controller/onevsonecontroller.dart';
-import 'package:geometryhunter/screens/select-shape_screen.dart';
-import 'package:geometryhunter/screens/game-over&draw_screens/game-draw_screen.dart';
-import 'package:geometryhunter/screens/game-over&draw_screens/game-win(1vs1)_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'game-over&draw_screens/game-draw_screen.dart';
+import 'game-over&draw_screens/game-win(1vs1)_screen.dart';
 
 class WhosBiggerScreen extends StatelessWidget {
   WhosBiggerScreen({super.key});

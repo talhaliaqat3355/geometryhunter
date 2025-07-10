@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:geometryhunter/constants.dart';
-import 'package:geometryhunter/screens/game_mode_screen.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:geometryhunter/screens/infinite-mod_screen.dart';
-import 'package:geometryhunter/gallery_store.dart';
+
+import '../../constants.dart';
+import '../../gallery_store.dart';
+import '../game_mode_screen.dart';
+import '../infinite-mod_screen.dart';
+
 
 class GameOverInfiniteScreen extends StatelessWidget {
   final int photoCount;

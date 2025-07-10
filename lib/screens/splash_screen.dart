@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:geometryhunter/constants.dart';
-import 'package:geometryhunter/screens/home_screen.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../constants.dart';
+import 'home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

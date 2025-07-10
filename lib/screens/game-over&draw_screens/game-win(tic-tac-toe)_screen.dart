@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:geometryhunter/constants.dart';
-import 'package:geometryhunter/gallery_store.dart';
-import 'package:geometryhunter/screens/game_mode_screen.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/routes/default_transitions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../constants.dart';
+import '../../gallery_store.dart';
+import '../game_mode_screen.dart';
 
 class GameWinScreen extends StatelessWidget {
   final int winnerPlayer;

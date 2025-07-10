@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:geometryhunter/constants.dart';
-import 'package:geometryhunter/controller/onevsonecontroller.dart';
-import 'package:geometryhunter/screens/game_mode_screen.dart';
+
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:geometryhunter/screens/1vs1game-mod_screen.dart';
+
+import '../../constants.dart';
+import '../../controller/onevsonecontroller.dart';
+import '../1vs1game-mod_screen.dart';
+import '../game_mode_screen.dart';
 
 class GameWin1vs1Screen extends StatelessWidget {
   final int player1Score;

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:geometryhunter/screens/gallery_screen.dart';
-import 'package:geometryhunter/screens/game_mode_screen.dart';
 import 'package:get/get.dart';
 import '../constants.dart';
-import 'package:geometryhunter/screens/guide_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:geometryhunter/controller/music_controller.dart';
+
+import '../controller/music_controller.dart';
+import 'gallery_screen.dart';
+import 'game_mode_screen.dart';
+import 'guide_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
