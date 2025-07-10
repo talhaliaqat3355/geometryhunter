@@ -3,7 +3,7 @@ import 'package:GH0406/screens/select-shape_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../constants.dart';
-import '../controller/onevsonecontroller.dart';
+import '../controller/one_vs_one_controller.dart';
 import '../gallery_store.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

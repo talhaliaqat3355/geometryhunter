@@ -94,7 +94,7 @@ class GameOverInfiniteScreen extends StatelessWidget {
                             ),
                             SizedBox(height: 30.h),
                             Text(
-                              "Shapes Used:",
+                              "Shapes:",
                               style: TextStyle(fontWeight: FontWeight.bold, color: kPrimaryColor, fontSize: 20.sp),
                             ),
                             SizedBox(height: 10.h),

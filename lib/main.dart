@@ -7,7 +7,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'controller/music_controller.dart';
-import 'controller/onevsonecontroller.dart';
+import 'controller/one_vs_one_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
