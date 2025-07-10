@@ -94,11 +94,10 @@ class PhotoPreviewScreen extends StatelessWidget {
                           if (pickedFile != null) {
                             final File newImageFile = File(pickedFile.path);
 
-                            // Replace this preview screen with a new one
                             Get.off(() => PhotoPreviewScreen(
                               imageFile: newImageFile,
-                              shapeName: shapeName, // reuse previously selected shape
-                              onUsePhoto: onUsePhoto, // reuse original callback
+                              shapeName: shapeName,
+                              onUsePhoto: onUsePhoto,
                             ));
                           }
                         },
