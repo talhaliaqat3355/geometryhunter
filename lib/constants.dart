@@ -68,3 +68,29 @@ final kPlayer1TextStyle =TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 18.sp,
 );
+final kSelectShapeTextStyle = TextStyle(
+  fontSize: 24.sp,
+  fontWeight: FontWeight.bold,
+  letterSpacing: 1,
+);
+final kPlayWSShapeTextStyle =TextStyle(
+  fontWeight: FontWeight.w500,
+  fontSize: 18.sp,
+  color: kPrimaryColor,
+);
+final kSelectRandomShapeTextStyle = TextStyle(
+    fontSize: 18.sp,
+    color: Colors.white
+);
+final kWhatsPsychoGeometry =  TextStyle(
+  color: kPrimaryColor,
+  fontSize: 18.sp,
+  fontWeight: FontWeight.bold,
+  letterSpacing: 1.w,
+);
+final kHowToPlayTextStyle = TextStyle(
+  color: kPrimaryColor,
+  fontSize: 24.sp,
+  fontWeight: FontWeight.bold,
+  letterSpacing: 1.w,
+);

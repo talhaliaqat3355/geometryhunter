@@ -44,11 +44,7 @@ class SelectShapeScreen extends StatelessWidget {
                         SizedBox(width: 1.w),
                         Text(
                           "BACK",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.sp,
-                            color: kPrimaryColor,
-                          ),
+                          style: kBackButtonTextStyle
                         ),
                       ],
                     ),
@@ -58,11 +54,7 @@ class SelectShapeScreen extends StatelessWidget {
                    Center(
                     child: Text(
                       "SELECT A SHAPE",
-                      style: TextStyle(
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1,
-                      ),
+                      style: kSelectShapeTextStyle
                     ),
                   ),
 
@@ -109,11 +101,7 @@ class SelectShapeScreen extends StatelessWidget {
                       },
                       child:  Text(
                         "Play without selecting shapes",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18.sp,
-                          color: kPrimaryColor,
-                        ),
+                        style: kPlayWSShapeTextStyle
                       ),
                     ),
                   ),
@@ -134,7 +122,7 @@ class SelectShapeScreen extends StatelessWidget {
                       ),
                       child:  Text(
                         "Select random shape",
-                        style: TextStyle(fontSize: 18.sp, color: Colors.white),
+                        style: kSelectRandomShapeTextStyle
                       ),
                     ),
                   ),

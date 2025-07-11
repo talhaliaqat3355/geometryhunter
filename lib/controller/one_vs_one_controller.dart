@@ -59,7 +59,6 @@ class OneVsOneController extends GetxController {
           } else {
             player2ImagePath = savedFile.path;
           }
-
           // Notify callback and switch player
           onCaptured(savedFile.path);
           currentPlayer.value = currentPlayer.value == 1 ? 2 : 1;

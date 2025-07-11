@@ -34,11 +34,7 @@ class GuideScreen extends StatelessWidget {
                           SizedBox(width: 1.w),
                           Text(
                             "BACK",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18.sp,
-                              color: kTextColor,
-                            ),
+                            style: kBackButtonTextStyle
                           ),
                         ],
                       ),
@@ -52,12 +48,7 @@ class GuideScreen extends StatelessWidget {
                      SizedBox(width: 4.w),
                      Text(
                           "HOW TO PLAY?",
-                          style: TextStyle(
-                            color: kPrimaryColor,
-                            fontSize: 24.sp,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.w,
-                          ),
+                          style: kHowToPlayTextStyle
                         ),
                        ]
                       ),

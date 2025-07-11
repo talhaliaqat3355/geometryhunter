@@ -46,11 +46,7 @@ class _WhatsPsychogeometryScreenState extends State<WhatsPsychogeometryScreen> {
                         SizedBox(width: 1.w),
                         Text(
                           "BACK",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.sp,
-                            color: kTextColor,
-                          ),
+                          style: kBackButtonTextStyle
                         ),
                       ],
                     ),
@@ -67,12 +63,7 @@ class _WhatsPsychogeometryScreenState extends State<WhatsPsychogeometryScreen> {
                           "WHAT IS PSYCHOGEOMETRY?",
                           softWrap: true,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: kPrimaryColor,
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.w,
-                          ),
+                          style:kWhatsPsychoGeometry
                         ),
                       ),
                     ],

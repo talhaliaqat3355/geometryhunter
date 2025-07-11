@@ -190,8 +190,12 @@ class WhosBiggerScreen extends StatelessWidget {
             ],
           ),
         ),
-        if (isActive)
-          Padding(
+
+        // Fixed height container for "Your move!" text or equivalent space
+        Container(
+          height: 40.h, // Fixed height to match active player's space
+          child: isActive
+              ? Padding(
             padding: EdgeInsets.only(top: 10.h),
             child: Text(
               "Your move!",
@@ -201,27 +205,34 @@ class WhosBiggerScreen extends StatelessWidget {
                 fontSize: 18.sp,
               ),
             ),
-          ),
-        SizedBox(height: 20.h),
-        if (imagePath != null)
-          Container(
-            width: 80.w,
-            height: 60.h,
-            decoration: BoxDecoration(
-              border: Border.all(color: kPlayerColor, width: 2.w),
-              borderRadius: BorderRadius.circular(8.r),
-            ),
-            child: Image.file(File(imagePath), fit: BoxFit.cover),
-          ),
-        if (isActive)
-          GestureDetector(
+          )
+              : null,
+        ),
+
+        // Fixed height container for captured image
+        Container(
+          width: 80.w,
+          height: 60.h,
+          decoration: imagePath != null
+              ? BoxDecoration(
+            border: Border.all(color: kPlayerColor, width: 2.w),
+            borderRadius: BorderRadius.circular(8.r),
+          )
+              : null,
+          child: imagePath != null
+              ? Image.file(File(imagePath), fit: BoxFit.cover)
+              : null,
+        ),
+        // Fixed height container for camera placeholder or equivalent space
+        Container(
+          height: 70.h, // Height matches camera placeholder + padding
+          child: isActive
+              ? GestureDetector(
             onTap: () {
               Get.to(() => SelectShapeScreen(
                 onShapeSelected: (shape) async {
                   Get.back();
-                  await controller.takeTurn((imagePath) {
-                    // optional: trigger UI update
-                  }, shape);
+                  await controller.takeTurn((imagePath) {}, shape);
                 },
               ));
             },
@@ -229,7 +240,9 @@ class WhosBiggerScreen extends StatelessWidget {
               padding: EdgeInsets.only(top: 10.h),
               child: Image.asset('assets/images/camera_placeholder.png', height: 60.h),
             ),
-          ),
+          )
+              : null,
+        ),
       ],
     );
   }
