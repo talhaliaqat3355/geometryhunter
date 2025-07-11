@@ -79,10 +79,7 @@ class PhotoPreviewScreen extends StatelessWidget {
                         ),
                         child: Text(
                           "Use this photo",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.sp,
-                          ),
+                          style: kUseThisPhotoTextStyle
                         ),
                       ),
                       SizedBox(height: 15.h),
@@ -111,10 +108,7 @@ class PhotoPreviewScreen extends StatelessWidget {
                         ),
                         child: Text(
                           "Take a new one",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.sp,
-                          ),
+                          style: kTakeNewOneTextStyle
                         ),
                       ),
                     ],

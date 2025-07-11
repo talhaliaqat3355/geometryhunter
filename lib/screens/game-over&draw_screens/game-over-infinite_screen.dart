@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../constants.dart';
 import '../../gallery_store.dart';
 import '../game_mode_screen.dart';
-import '../infinite-mod_screen.dart';
+import '../game_screens/infinite_game_mod_screen.dart';
 
 
 class GameOverInfiniteScreen extends StatelessWidget {

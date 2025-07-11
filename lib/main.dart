@@ -2,10 +2,7 @@ import 'package:GH0406/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:flutter/foundation.dart';
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'controller/music_controller.dart';
 import 'controller/one_vs_one_controller.dart';
 
@@ -19,12 +16,7 @@ void main() async {
 
   Get.put(MusicController());
   Get.put(OneVsOneController());
-  runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => MyApp(), // Wrap your app
-    ),
-  );
+  runApp( MyApp());
 }
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -40,8 +32,6 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       useInheritedMediaQuery: true,
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
       title: 'GeometryHunter',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

@@ -21,7 +21,7 @@ final kStartNewGameTextStyle =TextStyle(
 final kBackButtonTextStyle =  TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 18.sp,
-  color: kPrimaryColor,
+  color: kTextColor,
 );
 final kSelectModTextStyle = TextStyle(
   fontSize: 24.sp,
@@ -93,4 +93,12 @@ final kHowToPlayTextStyle = TextStyle(
   fontSize: 24.sp,
   fontWeight: FontWeight.bold,
   letterSpacing: 1.w,
+);
+final kUseThisPhotoTextStyle = TextStyle(
+  color: Colors.white,
+  fontSize: 18.sp,
+);
+final kTakeNewOneTextStyle = TextStyle(
+  color: Colors.white,
+  fontSize: 18.sp,
 );

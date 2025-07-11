@@ -1,9 +1,8 @@
-import 'package:GH0406/screens/whats-psychogeometry_screen.dart';
+import 'package:GH0406/screens/help_screens/whats-psychogeometry_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../constants.dart';
+import '../../constants.dart';
 
 class GuideScreen extends StatelessWidget {
   const GuideScreen({super.key});

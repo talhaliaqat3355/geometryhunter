@@ -2,13 +2,12 @@ import 'dart:io';
 import 'package:GH0406/screens/select-shape_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../constants.dart';
-import '../controller/one_vs_one_controller.dart';
-import '../gallery_store.dart';
+import '../../constants.dart';
+import '../../controller/one_vs_one_controller.dart';
+import '../../gallery_store.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'game-over&draw_screens/game-draw_screen.dart';
-import 'game-over&draw_screens/game-win(1vs1)_screen.dart';
+import '../game-over&draw_screens/game-draw_screen.dart';
+import '../game-over&draw_screens/game-win(1vs1)_screen.dart';
 
 class WhosBiggerScreen extends StatelessWidget {
   WhosBiggerScreen({super.key});
@@ -163,6 +162,7 @@ class WhosBiggerScreen extends StatelessWidget {
 
     return Column(
       children: [
+        // Player tag
         Container(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
           decoration: BoxDecoration(
@@ -191,43 +191,37 @@ class WhosBiggerScreen extends StatelessWidget {
           ),
         ),
 
-        // Fixed height container for "Your move!" text or equivalent space
-        Container(
-          height: 40.h, // Fixed height to match active player's space
-          child: isActive
-              ? Padding(
-            padding: EdgeInsets.only(top: 10.h),
-            child: Text(
-              "Your move!",
-              style: TextStyle(
-                color: isPlayer1 ? Colors.blue.shade600 : Colors.red,
-                fontWeight: FontWeight.bold,
-                fontSize: 18.sp,
-              ),
+        // "Your move!" text - only show for active playerg
+        if (isActive) ...[
+          SizedBox(height: 10.h),
+          Text(
+            "Your move!",
+            style: TextStyle(
+              color: isPlayer1 ? Colors.blue.shade600 : Colors.red,
+              fontWeight: FontWeight.bold,
+              fontSize: 18.sp,
             ),
-          )
-              : null,
-        ),
+          ),
+        ],
 
-        // Fixed height container for captured image
-        Container(
-          width: 80.w,
-          height: 60.h,
-          decoration: imagePath != null
-              ? BoxDecoration(
-            border: Border.all(color: kPlayerColor, width: 2.w),
-            borderRadius: BorderRadius.circular(8.r),
-          )
-              : null,
-          child: imagePath != null
-              ? Image.file(File(imagePath), fit: BoxFit.cover)
-              : null,
-        ),
-        // Fixed height container for camera placeholder or equivalent space
-        Container(
-          height: 70.h, // Height matches camera placeholder + padding
-          child: isActive
-              ? GestureDetector(
+        SizedBox(height: isActive ? 12.h : 40.h),
+        // Captured image container (if image exists)
+        if (imagePath != null) ...[
+          Container(
+            width: 90.w,
+            height: 70.h,
+            decoration: BoxDecoration(
+              border: Border.all(color: kPlayerColor, width: 2.w),
+              borderRadius: BorderRadius.circular(8.r),
+            ),
+            child: Image.file(File(imagePath), fit: BoxFit.cover),
+          ),
+          SizedBox(height: 10.h), // Space between captured image and camera
+        ],
+
+        // Camera placeholder (always show for active player)
+        if (isActive) ...[
+          GestureDetector(
             onTap: () {
               Get.to(() => SelectShapeScreen(
                 onShapeSelected: (shape) async {
@@ -236,13 +230,16 @@ class WhosBiggerScreen extends StatelessWidget {
                 },
               ));
             },
-            child: Padding(
-              padding: EdgeInsets.only(top: 10.h),
+            child: Container(
+              width: 90.w,
+              height: 70.h,
+              decoration: BoxDecoration(
+               // border: Border.all(color: kPlayerColor.withOpacity(0.5),) // width: 1.w
+              ),
               child: Image.asset('assets/images/camera_placeholder.png', height: 60.h),
             ),
-          )
-              : null,
-        ),
+          ),
+        ],
       ],
     );
   }

@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../controller/music_controller.dart';
 import 'gallery_screen.dart';
 import 'game_mode_screen.dart';
-import 'guide_screen.dart';
+import 'help_screens/guide_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

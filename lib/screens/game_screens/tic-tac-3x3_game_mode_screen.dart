@@ -9,10 +9,10 @@ import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../constants.dart';
-import '../gallery_store.dart';
-import 'game-over&draw_screens/game-draw_screen.dart';
-import 'game-over&draw_screens/game-win(tic-tac-toe)_screen.dart';
+import '../../constants.dart';
+import '../../gallery_store.dart';
+import '../game-over&draw_screens/game-draw_screen.dart';
+import '../game-over&draw_screens/game-win(tic-tac-toe)_screen.dart';
 
 class TicTacToeScreen extends StatefulWidget {
   const TicTacToeScreen({super.key});

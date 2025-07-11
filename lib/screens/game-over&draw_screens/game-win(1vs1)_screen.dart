@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constants.dart';
 import '../../controller/one_vs_one_controller.dart';
-import '../1vs1game-mod_screen.dart';
+import '../game_screens/1vs1game_mod_screen.dart';
 import '../game_mode_screen.dart';
 
 class GameWin1vs1Screen extends StatelessWidget {
