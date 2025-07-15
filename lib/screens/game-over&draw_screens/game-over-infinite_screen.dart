@@ -108,7 +108,7 @@ class GameOverInfiniteScreen extends StatelessWidget {
                       SizedBox(height: 40.h),
                       ElevatedButton(
                         onPressed: () {
-                          GalleryStore.clear();
+                          //GalleryStore.clear();
                           Get.off(InfiniteModScreen());
                         },
                         style: ElevatedButton.styleFrom(
@@ -126,7 +126,7 @@ class GameOverInfiniteScreen extends StatelessWidget {
                       SizedBox(height: 20.h),
                       ElevatedButton(
                         onPressed: () {
-                          GalleryStore.clear();
+                         // GalleryStore.clear();
                           Get.offAll(() => const GameModeScreen());
                         },
                         style: ElevatedButton.styleFrom(

@@ -101,7 +101,7 @@ class _GameDrawState extends State<GameDrawScreen> {
                                 controller.resetGame() ;
                                 Get.off(() =>  WhosBiggerScreen());
                               } else if (widget.previousGameScreen is TicTacToeScreen) {
-                                GalleryStore.clear();
+                                //GalleryStore.clear();
                                 Get.off(() => const TicTacToeScreen());
                               }
                             },

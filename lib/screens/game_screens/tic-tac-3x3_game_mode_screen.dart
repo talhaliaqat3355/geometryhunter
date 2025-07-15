@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
-
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -29,56 +28,76 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
 
   final ImagePicker _picker = ImagePicker();
 
+  String? player1Shape;
+  String? player2Shape;
+  bool player1ShapeSelected = false;
+  bool player2ShapeSelected = false;
+
   Future<void> _captureImage(int index) async {
     if (_images[index] != null) return;
 
-    Get.to(() => SelectShapeScreen(
-      onShapeSelected: (shapeName) async {
-        Get.back();
-        final pickedFile = await _picker.pickImage(source: ImageSource.camera);
-        if (pickedFile != null) {
-          final imageFile = File(pickedFile.path);
+    if ((currentPlayer == 1 && !player1ShapeSelected) ||
+        (currentPlayer == 2 && !player2ShapeSelected)) {
+      await Get.to(() => SelectShapeScreen(
+        onShapeSelected: (shapeName) {
+          if (currentPlayer == 1) {
+            player1Shape = shapeName;
+            player1ShapeSelected = true;
+          } else {
+            player2Shape = shapeName;
+            player2ShapeSelected = true;
+          }
+          Get.back();
+          _openCamera(index);
+        },
+      ));
+    } else {
+      _openCamera(index);
+    }
+  }
 
-          // Navigate to Preview Screen
-          Get.to(() => PhotoPreviewScreen(
-            imageFile: imageFile,
-            shapeName: shapeName,
-            onUsePhoto: () async {
-              Get.back(); // Close preview
+  void _openCamera(int index) async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      final imageFile = File(pickedFile.path);
+      final shapeName = currentPlayer == 1 ? player1Shape! : player2Shape!;
 
-              final appDir = await getApplicationDocumentsDirectory();
-              final fileName = 'img_${DateTime.now().millisecondsSinceEpoch}.jpg';
-              final savedPath = path.join(appDir.path, fileName);
-              final savedImage = await imageFile.copy(savedPath);
+      Get.to(() => PhotoPreviewScreen(
+        imageFile: imageFile,
+        shapeName: shapeName,
+        onUsePhoto: () async {
+          Get.back();
 
-              setState(() {
-                _images[index] = savedImage;
-                _playerMoves[index] = currentPlayer;
-                moveCount++;
-              });
+          final appDir = await getApplicationDocumentsDirectory();
+          final fileName = 'img_${DateTime.now().millisecondsSinceEpoch}.jpg';
+          final savedPath = path.join(appDir.path, fileName);
+          final savedImage = await imageFile.copy(savedPath);
 
-              GalleryStore.addImage(savedImage.path, shape: shapeName);
+          setState(() {
+            _images[index] = savedImage;
+            _playerMoves[index] = currentPlayer;
+            moveCount++;
+          });
 
+          GalleryStore.addImage(savedImage.path, shape: shapeName);
 
-              if (_checkWinner(currentPlayer)) {
-                Future.delayed(const Duration(milliseconds: 300), () {
-                  Get.to(() => GameWinScreen(
-                    winnerPlayer: currentPlayer,
-                    previousGameScreen: const TicTacToeScreen(),
-                  ));
-                });
-              } else if (moveCount == 9) {
-                Get.to(() => GameDrawScreen(previousGameScreen: const TicTacToeScreen()));
-              } else {
-                setState(() {
-                  currentPlayer = currentPlayer == 1 ? 2 : 1;
-                });
-              }
-            },
-          ));
-        }
-      },
-    ));
+          if (_checkWinner(currentPlayer)) {
+            Future.delayed(const Duration(milliseconds: 300), () {
+              Get.to(() => GameWinScreen(
+                winnerPlayer: currentPlayer,
+                previousGameScreen: const TicTacToeScreen(),
+              ));
+            });
+          } else if (moveCount == 9) {
+            Get.to(() => GameDrawScreen(previousGameScreen: const TicTacToeScreen()));
+          } else {
+            setState(() {
+              currentPlayer = currentPlayer == 1 ? 2 : 1;
+            });
+          }
+        },
+      ));
+    }
   }
 
   bool _checkWinner(int player) {
@@ -105,10 +124,7 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: Image.asset(
-              'assets/images/bg.png',
-              fit: BoxFit.cover,
-            ),
+            child: Image.asset('assets/images/bg.png', fit: BoxFit.cover),
           ),
           SafeArea(
             child: Column(
@@ -125,10 +141,7 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
                             children: [
                               Image.asset('assets/images/tic-tac_icon.png', height: 30.h),
                               SizedBox(width: 5.w),
-                              Text(
-                                "TIC TAC TOE - 3X3",
-                                style: kTicTacToeTextStyle
-                              ),
+                              Text("TIC TAC TOE - 3X3", style: kTicTacToeTextStyle),
                             ],
                           ),
                           const Divider(color: kPrimaryColor),
@@ -143,14 +156,26 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
                                   _PlayerTag("Player 2", 2),
                                 ],
                               ),
-                              if (currentPlayer == 1)
+                              if (currentPlayer == 1 && player1Shape != null)
                                 Positioned(
                                   left: 0,
                                   right: 0,
                                   top: 0,
                                   child: Center(
                                     child: Image.asset(
-                                      'assets/images/triangle-shape_icon.png',
+                                      'assets/images/${player1Shape}_icon.png',
+                                      height: 40.h,
+                                    ),
+                                  ),
+                                ),
+                              if (currentPlayer == 2 && player2Shape != null)
+                                Positioned(
+                                  left: 0,
+                                  right: 0,
+                                  top: 0,
+                                  child: Center(
+                                    child: Image.asset(
+                                      'assets/images/${player2Shape}_icon.png',
                                       height: 40.h,
                                     ),
                                   ),
@@ -185,7 +210,6 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
                                         );
                                       },
                                     ),
-                                    // Dividers
                                     Positioned(
                                       top: cellSize - 1,
                                       left: 0,
@@ -247,10 +271,7 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
                         borderRadius: BorderRadius.circular(30.r),
                       ),
                     ),
-                    child: Text(
-                      "End game",
-                      style: kEndGameButtonTextStyle
-                    ),
+                    child: Text("End game", style: kEndGameButtonTextStyle),
                   ),
                 )
               ],
