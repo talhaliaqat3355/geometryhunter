@@ -26,7 +26,7 @@ class _InfiniteModScreenState extends State<InfiniteModScreen> {
   final Infinite1v1Controller controller = Get.put(Infinite1v1Controller());
 
   List<File> _images = [];
-
+final Set<String> _currentShapes = {} ;
   Future<void> _captureForPlayer(int player) async {
     final shape = controller.getShape(player);
     if (shape.isEmpty) {
@@ -59,6 +59,7 @@ class _InfiniteModScreenState extends State<InfiniteModScreen> {
         GalleryStore.addImage(savedImage.path, shape: shape, mode :'infinite' );
         setState(() {
           _images.add(savedImage);
+          _currentShapes.add(shape);
         });
 
         Get.back();
@@ -145,8 +146,7 @@ class _InfiniteModScreenState extends State<InfiniteModScreen> {
                   padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 20.h),
                   child: ElevatedButton(
                     onPressed: () {
-                      final usedShapes = GalleryStore.getInfiniteShapes();
-
+                      final usedShapes = _currentShapes.toList();
                       Get.to(() => GameOverInfiniteScreen(
                         photoCount: _images.length,
                         shapeList: usedShapes,
