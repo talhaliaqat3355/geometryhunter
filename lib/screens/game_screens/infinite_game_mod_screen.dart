@@ -56,7 +56,7 @@ class _InfiniteModScreenState extends State<InfiniteModScreen> {
         final savedPath = path.join(appDir.path, fileName);
         final savedImage = await imageFile.copy(savedPath);
 
-        GalleryStore.addImage(savedImage.path, shape: shape);
+        GalleryStore.addImage(savedImage.path, shape: shape, mode :'infinite' );
         setState(() {
           _images.add(savedImage);
         });
@@ -72,7 +72,9 @@ class _InfiniteModScreenState extends State<InfiniteModScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          Positioned.fill(child: Image.asset('assets/images/bg.png', fit: BoxFit.cover)),
+          Positioned.fill(
+              child: Image.asset('assets/images/bg.png', fit: BoxFit.cover)
+          ),
           SafeArea(
             child: Column(
               children: [
@@ -143,12 +145,7 @@ class _InfiniteModScreenState extends State<InfiniteModScreen> {
                   padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 20.h),
                   child: ElevatedButton(
                     onPressed: () {
-                      final usedShapes = GalleryStore.getTaggedImages()
-                          .map((img) => img['shape'] as String?)
-                          .whereType<String>()
-                          .where((shape) => shape.trim().toLowerCase() != "all")
-                          .toSet()
-                          .toList();
+                      final usedShapes = GalleryStore.getInfiniteShapes();
 
                       Get.to(() => GameOverInfiniteScreen(
                         photoCount: _images.length,

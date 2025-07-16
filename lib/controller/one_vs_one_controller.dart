@@ -31,34 +31,28 @@ class OneVsOneController extends GetxController {
 
   final RxMap<int, int> remainingTime = <int, int>{1: 60, 2: 60}.obs;
 
-  // Start timer for current player
   void startPlayerTimer(int player, VoidCallback onPlayerTimeEnd, {bool reset = false}) {
     currentPlayer.value = player;
     _timer?.cancel();
 
-    if (reset) remainingTime[player] = 60;
-    secondsLeft.value = remainingTime[player]!;
+    // If reset required
+    if (reset || remainingTime[player] == null) {
+      remainingTime[player] = 60;
+    }
 
+    secondsLeft.value = remainingTime[player]!;
     timerStarted.value = true;
 
-    final int original = remainingTime[player]!;
-    final DateTime startTime = DateTime.now();
-
-    _timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      final elapsed = DateTime.now().difference(startTime).inSeconds;
-      final timeLeft = original - elapsed;
-
-      if (timeLeft <= 0) {
-        secondsLeft.value = 0;
-        remainingTime[player] = 0;
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (secondsLeft.value <= 0) {
         timer.cancel();
         timerStarted.value = false;
-
+        remainingTime[player] = 0;
         playersFinished++;
         onPlayerTimeEnd();
-      } else if (timeLeft != secondsLeft.value) {
-        secondsLeft.value = timeLeft;
-        remainingTime[player] = timeLeft;
+      } else {
+        secondsLeft.value--;
+        remainingTime[player] = secondsLeft.value;
       }
     });
   }
@@ -68,7 +62,6 @@ class OneVsOneController extends GetxController {
     timerStarted.value = false;
   }
 
-  // Switch to next player or finish
   void switchToNextPlayer(VoidCallback onFinalGameEnd) {
     if (playersFinished == 1) {
       int nextPlayer = currentPlayer.value == 1 ? 2 : 1;
@@ -80,9 +73,9 @@ class OneVsOneController extends GetxController {
       onFinalGameEnd();
     }
   }
-  // Capture image flow
+
   Future<void> captureImage(int player, VoidCallback onTimeEnd) async {
-    stopTimer();
+    stopTimer(); // stop immediately when camera opens
 
     if (!_isShapeSelected(player)) {
       shapeSelectedForPlayers.add(player);
@@ -100,7 +93,10 @@ class OneVsOneController extends GetxController {
   }
 
   Future<void> _openCameraAndSave(
-      int player, String shape, VoidCallback onTimeEnd) async {
+      int player,
+      String shape,
+      VoidCallback onTimeEnd,
+      ) async {
     final pickedFile = await _picker.pickImage(source: ImageSource.camera);
     if (pickedFile != null) {
       final File imageFile = File(pickedFile.path);
@@ -115,18 +111,16 @@ class OneVsOneController extends GetxController {
           final savedFile = await imageFile.copy(savedPath);
 
           GalleryStore.addImage(savedFile.path, shape: shape, player: player);
-
           playerImages[player]!.add(savedFile.path);
           playerImages.refresh();
 
           Get.back(); // close preview
-
-          startPlayerTimer(player, onTimeEnd, reset: false);
+          startPlayerTimer(player, onTimeEnd); // resume timer
         },
       ));
     } else {
-      // Resume timer even if user cancels
-      startPlayerTimer(player, onTimeEnd, reset: false);
+      // resume if camera cancelled
+      startPlayerTimer(player, onTimeEnd);
     }
   }
 
@@ -172,9 +166,12 @@ class OneVsOneController extends GetxController {
     remainingTime[1] = 60;
     remainingTime[2] = 60;
 
-    // GalleryStore.clear(); // Do not clear unless app restart
+    // GalleryStore.clear(); // Keep as-is if not needed
   }
 }
+
+
+
 
 
 

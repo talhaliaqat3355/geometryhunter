@@ -1,11 +1,12 @@
 class GalleryStore {
   static final List<Map<String, dynamic>> _gallery = [];
 
-  static void addImage(String path, {String shape = "All", int player = 1}) {
+  static void addImage(String path, {String shape = "All", int player = 1, mode = "all"}) {
     _gallery.add({
       "path": path,
       "shape": shape,
       "player": player,
+       "mode": mode,
     });
   }
 
@@ -14,8 +15,9 @@ class GalleryStore {
     return _gallery;
   }
 // return all shapes except 'All'
-  static List<String> getAllShapes() {
+  static List<String> getInfiniteShapes() {
     return _gallery
+        .where((img) => img['mode'] == 'infinite')
         .map((img) => img['shape'] as String?)
         .whereType<String>() // remove nulls
         .where((shape)=> shape.trim().toLowerCase() != "all")

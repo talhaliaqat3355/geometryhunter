@@ -61,7 +61,6 @@ class PhotoPreviewScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-
                 const Spacer(),
 
                 Padding(
