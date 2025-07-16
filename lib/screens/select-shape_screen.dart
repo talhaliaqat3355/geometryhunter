@@ -56,7 +56,6 @@ class SelectShapeScreen extends StatelessWidget {
                       style: kSelectShapeTextStyle
                     ),
                   ),
-
                    SizedBox(height: 20.h),
 
                   // Shape Grid
@@ -96,7 +95,7 @@ class SelectShapeScreen extends StatelessWidget {
                   Center(
                     child: TextButton(
                       onPressed: () {
-                        onShapeSelected("Unknown");
+                       // onShapeSelected("Unknown");
                       },
                       child:  Text(
                         "Play without selecting shapes",
@@ -125,7 +124,6 @@ class SelectShapeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
                    SizedBox(height: 16.h),
                 ],
               ),

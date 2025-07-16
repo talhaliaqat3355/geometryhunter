@@ -77,6 +77,7 @@ flutter:
     - assets/images/Square_icon.png
     - assets/images/Zigzag_icon.png
     - assets/images/Triangle_icon.png
+    - assets/images/Cross_icon.png
     - assets/images/music_off_icon.png
 
   # The following line ensures that the Material Icons font is
