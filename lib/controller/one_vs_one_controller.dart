@@ -31,7 +31,7 @@ class OneVsOneController extends GetxController {
 
   final RxMap<int, int> remainingTime = <int, int>{1: 60, 2: 60}.obs;
 
- // start timer for current player and resume where stops and reset.
+  // Start timer for current player
   void startPlayerTimer(int player, VoidCallback onPlayerTimeEnd, {bool reset = false}) {
     currentPlayer.value = player;
     _timer?.cancel();
@@ -68,6 +68,7 @@ class OneVsOneController extends GetxController {
     timerStarted.value = false;
   }
 
+  // Switch to next player or finish
   void switchToNextPlayer(VoidCallback onFinalGameEnd) {
     if (playersFinished == 1) {
       int nextPlayer = currentPlayer.value == 1 ? 2 : 1;
@@ -79,8 +80,10 @@ class OneVsOneController extends GetxController {
       onFinalGameEnd();
     }
   }
-
+  // Capture image flow
   Future<void> captureImage(int player, VoidCallback onTimeEnd) async {
+    stopTimer();
+
     if (!_isShapeSelected(player)) {
       shapeSelectedForPlayers.add(player);
       Get.to(() => SelectShapeScreen(
@@ -96,14 +99,8 @@ class OneVsOneController extends GetxController {
     }
   }
 
-  // Camera + Save + Gallery + Resume timer
   Future<void> _openCameraAndSave(
-      int player,
-      String shape,
-      VoidCallback onTimeEnd,
-      ) async {
-    stopTimer(); // pause timer
-
+      int player, String shape, VoidCallback onTimeEnd) async {
     final pickedFile = await _picker.pickImage(source: ImageSource.camera);
     if (pickedFile != null) {
       final File imageFile = File(pickedFile.path);
@@ -124,11 +121,11 @@ class OneVsOneController extends GetxController {
 
           Get.back(); // close preview
 
-          // resume timer from remaining time
           startPlayerTimer(player, onTimeEnd, reset: false);
         },
       ));
     } else {
+      // Resume timer even if user cancels
       startPlayerTimer(player, onTimeEnd, reset: false);
     }
   }
@@ -175,9 +172,10 @@ class OneVsOneController extends GetxController {
     remainingTime[1] = 60;
     remainingTime[2] = 60;
 
-   // GalleryStore.clear();
+    // GalleryStore.clear(); // Do not clear unless app restart
   }
 }
+
 
 
 

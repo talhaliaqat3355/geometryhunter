@@ -116,15 +116,15 @@ class _InfiniteModScreenState extends State<InfiniteModScreen> {
                           itemCount: _images.length + 1,
                           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 20,
+                            mainAxisSpacing: 20,
                           ),
                           itemBuilder: (context, index) {
                             if (index == _images.length) {
                               final player = controller.currentPlayer.value;
                               return GestureDetector(
                                 onTap: () => _captureForPlayer(player),
-                                child: Image.asset('assets/images/camera_placeholder.png', height: 100),
+                                child: Image.asset('assets/images/camera_placeholder.png', height: 120),
                               );
                             } else {
                               return ClipRRect(
