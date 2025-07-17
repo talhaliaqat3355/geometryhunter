@@ -2,11 +2,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../constants.dart';
+import 'package:GH0406/constants.dart';
 import '../../controller/one_vs_one_controller.dart';
-import '../../gallery_store.dart';
-import '../game-over&draw_screens/game-draw_screen.dart';
-import '../game-over&draw_screens/game-win(1vs1)_screen.dart';
+import '../game_overanddraw_screens/game_draw_screen.dart';
+import 'package:GH0406/screens/game_overanddraw_screens/game_win(1vs1)_screen.dart';
 
 class WhosBiggerScreen extends StatelessWidget {
   WhosBiggerScreen({super.key});
@@ -119,49 +118,42 @@ class WhosBiggerScreen extends StatelessWidget {
       );
     });
   }
-
   Widget _buildPlayersRow() {
     return Obx(() {
       return Column(
         children: [
-          // Player names and status row
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _playerNameSection("Player 1", 1),
-              Expanded(
-                child: Column(
-                  children: [
-                    _centerShape(),
-                  ],
-                ),
+              Column(
+                children: [
+                  _centerShape(),
+                  SizedBox(height: 6.h),
+                //  _scoreDisplay(),
+                ],
               ),
               _playerNameSection("Player 2", 2),
             ],
           ),
           SizedBox(height: 20.h),
-          // Images row - horizontally aligned
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Player 1 images
               Expanded(
                 child: Column(
                   children: [
                     ..._buildPlayerImages(1),
-                    if (controller.currentPlayer.value == 1)
-                      _buildCameraButton(1),
+                    _buildCameraButton(1),
                   ],
                 ),
               ),
               SizedBox(width: 20.w),
-              // Player 2 images
               Expanded(
                 child: Column(
                   children: [
                     ..._buildPlayerImages(2),
-                    if (controller.currentPlayer.value == 2)
-                      _buildCameraButton(2),
+                    _buildCameraButton(2),
                   ],
                 ),
               ),
@@ -171,6 +163,18 @@ class WhosBiggerScreen extends StatelessWidget {
       );
     });
   }
+  // Widget _scoreDisplay() {
+  //   final p1 = controller.getPlayerImageCount(1);
+  //   final p2 = controller.getPlayerImageCount(2);
+  //   return Text(
+  //     "$p1  :  $p2",
+  //     style: TextStyle(
+  //       fontWeight: FontWeight.bold,
+  //       fontSize: 20.sp,
+  //       color: Colors.black87,
+  //     ),
+  //   );
+  // }
 
   Widget _centerShape() {
     final current = controller.currentPlayer.value;
@@ -243,8 +247,8 @@ class WhosBiggerScreen extends StatelessWidget {
         .map((path) => Padding(
       padding: EdgeInsets.only(bottom: 10.h),
       child: Container(
-        width: 90.w,
-        height: 70.h,
+        width: 80.w,
+        height: 60.h,
         decoration: BoxDecoration(
           border: Border.all(color: kPlayerColor, width: 2.w),
           borderRadius: BorderRadius.circular(8.r),

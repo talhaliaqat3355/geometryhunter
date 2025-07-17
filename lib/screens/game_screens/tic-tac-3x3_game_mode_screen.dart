@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:GH0406/screens/photo-preview_screen.dart';
-import 'package:GH0406/screens/select-shape_screen.dart';
+import 'package:GH0406/screens/photo_preview_screen.dart';
+import 'package:GH0406/screens/select_shape_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart' as path;
@@ -10,8 +10,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constants.dart';
 import '../../gallery_store.dart';
-import '../game-over&draw_screens/game-draw_screen.dart';
-import '../game-over&draw_screens/game-win(tic-tac-toe)_screen.dart';
+import 'package:GH0406/screens/game_overanddraw_screens/game_draw_screen.dart';
+import 'package:GH0406/screens/game_overanddraw_screens/game_win(tic_tac_toe)_screen.dart';
 
 class TicTacToeScreen extends StatefulWidget {
   const TicTacToeScreen({super.key});

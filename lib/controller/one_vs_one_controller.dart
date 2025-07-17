@@ -5,8 +5,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import '../gallery_store.dart';
-import '../screens/photo-preview_screen.dart';
-import 'package:GH0406/screens/select-shape_screen.dart';
+import '../screens/photo_preview_screen.dart';
+import 'package:GH0406/screens/select_shape_screen.dart';
 import 'package:flutter/foundation.dart';
 
 class OneVsOneController extends GetxController {

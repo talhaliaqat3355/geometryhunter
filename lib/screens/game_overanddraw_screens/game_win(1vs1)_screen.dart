@@ -41,7 +41,8 @@ class GameWin1vs1Screen extends StatelessWidget {
                 _startNewGameButton(),
                 SizedBox(height: 20.h),
                 _mainMenuButton(),
-              ]),
+              ]
+              ),
             ),
           ),
         ),

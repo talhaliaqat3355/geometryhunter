@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../constants.dart';
-import '../../gallery_store.dart';
-import '../game_mode_screen.dart';
-import '../game_screens/infinite_game_mod_screen.dart';
-
+import 'package:GH0406/constants.dart';
+import 'package:GH0406/screens/game_mode_screen.dart';
+import 'package:GH0406/screens/game_screens/infinite_game_mod_screen.dart';
 
 class GameOverInfiniteScreen extends StatelessWidget {
   final int photoCount;

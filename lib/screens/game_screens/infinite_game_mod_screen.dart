@@ -6,12 +6,11 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
-
 import '../../constants.dart';
 import '../../gallery_store.dart';
-import '../../screens/photo-preview_screen.dart';
-import '../../screens/select-shape_screen.dart';
-import '../../screens/game-over&draw_screens/game-over-infinite_screen.dart';
+import '../../screens/photo_preview_screen.dart';
+import '../../screens/select_shape_screen.dart';
+import 'package:GH0406/screens/game_overanddraw_screens//game_over_infinite_screen.dart';
 import '../../controller/infinite_1vs1_controller.dart';
 
 class InfiniteModScreen extends StatefulWidget {

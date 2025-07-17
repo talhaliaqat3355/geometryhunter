@@ -94,9 +94,9 @@ class _WhatsPsychogeometryScreenState extends State<WhatsPsychogeometryScreen> {
                         _buildSection(
                           title: 'Core Idea',
                           expanded: _coreIdeaExpanded,
-                          content: 'Psychogeometry is based on five personality types, each represented by a person\'s geometric shape:\n\n'
-                              '• Space\n• Circle\n• Trough\n• Zigzag\n\n'
-                              'Each study reflects unique psychological capabilities and interests with the others in different ways. It is important to note that psychogeometry itself attends classification systems, not if it is designed for deeper personality assessment tools used in psychology.',
+                          content: 'Psychogeometry is based on five personality types, each represented by a specific geometric shape:\n'
+                              '• Square\n• Circle\n• Triangle\n• Zigzag\n• Rectangle\n'
+                              'Each shape reflects unique psychological characteristics and interacts with the others in different ways. It is important to note that psychogeometry is not a strict classification systems, nor is it a replacement for deeper personality assessment tools used in psychology.',
                           onTap: () {
                             setState(() {
                               _coreIdeaExpanded = !_coreIdeaExpanded;
